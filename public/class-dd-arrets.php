@@ -56,6 +56,32 @@ class DD_Arrets {
 	 * @var      object
 	 */
 	protected static $instance = null;
+	
+	/**
+	 * Custom classes
+	*/
+	
+	protected $arrange;
+	
+	protected $dates;
+	
+	protected $grab;
+	
+	protected $database;
+	
+	protected $insert;
+	
+	protected $update;
+	
+	protected $nouveautes;
+	
+	protected $user;
+		
+	protected $search;
+	
+	protected $utils;
+	
+	protected $log;
 
 	/**
 	 * Initialize the plugin by setting localization and loading public scripts
@@ -74,12 +100,39 @@ class DD_Arrets {
 		// Load public-facing style sheet and JavaScript.
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		
+		// Cron job		
+		add_action( 'dd_daily_alert', array( $this, 'send_alertes' ) );
+		
+		// shortcode function
+		// add_action( 'admin_post_submit-form', array( $this, '_unsuscribe_nl' ) );
 
-		/* Define custom functionality.
-		 * Refer To http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
-		 */
-		add_action( '@TODO', array( $this, 'action_method_name' ) );
-		add_filter( '@TODO', array( $this, 'filter_method_name' ) );
+		// Custom classes fot plugin
+		
+		// Mode live or test
+		$mode = get_option('dd_arrets_mode'); 
+		
+		$this->arrange    = new Arrange();
+		
+		$this->dates      = new Dates($mode);
+		
+		$this->grab       = new Grab();
+		
+		$this->database   = new Database($mode);
+		
+		$this->insert     = new Insert($mode);	
+
+		$this->update     = new Update($mode);	
+
+		$this->nouveautes = new Nouveautes($mode);	
+
+		$this->user       = new User($mode);	
+		
+		$this->search     = new Search($mode);	
+
+		$this->utils      = new Utils();
+						
+		$this->log        = new Log();
 
 	}
 
@@ -220,9 +273,7 @@ class DD_Arrets {
 		global $wpdb;
 
 		// get an array of blog ids
-		$sql = "SELECT blog_id FROM $wpdb->blogs
-			WHERE archived = '0' AND spam = '0'
-			AND deleted = '0'";
+		$sql = "SELECT blog_id FROM $wpdb->blogsWHERE archived = '0' AND spam = '0' AND deleted = '0'";
 
 		return $wpdb->get_col( $sql );
 
@@ -303,6 +354,15 @@ class DD_Arrets {
 	 */
 	public function filter_method_name() {
 		// @TODO: Define your filter hook callback here
+	}
+
+	/**
+	 * Cron job fire , sending all alertes
+	 * Test the day
+	 *
+	 */	
+	public function send_alertes(){
+
 	}
 
 }

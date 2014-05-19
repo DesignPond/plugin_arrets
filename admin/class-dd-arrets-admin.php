@@ -75,6 +75,9 @@ class DD_Arrets_Admin {
 
 		// Add the options page and menu item.
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
+		
+		// Settings for plugin
+		add_action( 'admin_init', array( $this, 'register_dd_arrets_settings' ) );		
 
 		// Add an action link pointing to the options page.
 		$plugin_basename = plugin_basename( plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . $this->plugin_slug . '.php' );
@@ -86,8 +89,8 @@ class DD_Arrets_Admin {
 		 * Read more about actions and filters:
 		 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
 		 */
-		add_action( '@TODO', array( $this, 'action_method_name' ) );
-		add_filter( '@TODO', array( $this, 'filter_method_name' ) );
+		//add_action( '@TODO', array( $this, 'action_method_name' ) );
+		//add_filter( '@TODO', array( $this, 'filter_method_name' ) );
 
 	}
 
@@ -187,13 +190,18 @@ class DD_Arrets_Admin {
 		 *   For reference: http://codex.wordpress.org/Roles_and_Capabilities
 		 */
 		$this->plugin_screen_hook_suffix = add_options_page(
-			__( 'Page Title', $this->plugin_slug ),
-			__( 'Menu Text', $this->plugin_slug ),
+			__( 'Nouveaux arrêts', $this->plugin_slug ),
+			__( 'Nouveaux arrêts', $this->plugin_slug ),
 			'manage_options',
 			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )
 		);
 
+	}
+	
+	public function register_dd_arrets_settings(){
+	    //register our settings
+	    register_setting( 'dd-arrets-settings-group', 'dd_arrets_mode' );	
 	}
 
 	/**
@@ -212,39 +220,8 @@ class DD_Arrets_Admin {
 	 */
 	public function add_action_links( $links ) {
 
-		return array_merge(
-			array(
-				'settings' => '<a href="' . admin_url( 'options-general.php?page=' . $this->plugin_slug ) . '">' . __( 'Settings', $this->plugin_slug ) . '</a>'
-			),
-			$links
-		);
+		return array_merge(array('settings' => '<a href="' . admin_url( 'options-general.php?page=' . $this->plugin_slug ) . '">' . __( 'Settings', $this->plugin_slug ) . '</a>'),$links);
 
-	}
-
-	/**
-	 * NOTE:     Actions are points in the execution of a page or process
-	 *           lifecycle that WordPress fires.
-	 *
-	 *           Actions:    http://codex.wordpress.org/Plugin_API#Actions
-	 *           Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
-	 *
-	 * @since    1.0.0
-	 */
-	public function action_method_name() {
-		// @TODO: Define your action hook callback here
-	}
-
-	/**
-	 * NOTE:     Filters are points of execution in which WordPress modifies data
-	 *           before saving it or sending it to the browser.
-	 *
-	 *           Filters: http://codex.wordpress.org/Plugin_API#Filters
-	 *           Reference:  http://codex.wordpress.org/Plugin_API/Filter_Reference
-	 *
-	 * @since    1.0.0
-	 */
-	public function filter_method_name() {
-		// @TODO: Define your filter hook callback here
 	}
 
 }

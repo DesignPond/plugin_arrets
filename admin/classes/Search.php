@@ -5,9 +5,9 @@ class Search {
 	// DB tables
 	protected $nouveautes_table;
 
-	function __construct( ) {
+	function __construct( $test = null  ) {
 		
-		$this->nouveautes_table = 'wp_nouveautes_test';
+		$this->nouveautes_table = ( $test ? 'wp_nouveautes_test' : 'wp_nouveautes' );
 
 	}
 	 	 		 

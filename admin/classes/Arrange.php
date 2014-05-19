@@ -1,6 +1,6 @@
 <?php 
 
-require_once( plugin_dir_path( __FILE__ ) . '../simple_html_dom.php');
+require_once( plugin_dir_path(dirname(dirname( __FILE__) )) . 'includes/simple_html_dom.php');
 
 class Arrange {
 	

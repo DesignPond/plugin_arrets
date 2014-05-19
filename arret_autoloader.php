@@ -1,6 +1,6 @@
 <?php
 
-class AutoLoader {
+class Arret_AutoLoader {
      
     static private $classNames = array();
      
@@ -18,21 +18,21 @@ class AutoLoader {
 		    } elseif (substr($file->getFilename(), -4) === '.php') {
 		    	// save the class name / path of a .php file found
 				$className = substr($file->getFilename(), 0, -4);
-				AutoLoader::registerClass($className, $file->getPathname());
+				Arret_AutoLoader::registerClass($className, $file->getPathname());
 		    }
 	    }
     }
      
     public static function registerClass($className, $fileName) {
-   	 	AutoLoader::$classNames[$className] = $fileName;
+   	 	Arret_AutoLoader::$classNames[$className] = $fileName;
     }
      
     public static function loadClass($className) {
-   		if (isset(AutoLoader::$classNames[$className])) {
-	   		 require_once(AutoLoader::$classNames[$className]);
+   		if (isset(Arret_AutoLoader::$classNames[$className])) {
+	   		 require_once(Arret_AutoLoader::$classNames[$className]);
 	   	}
     }
      
 }
      
-spl_autoload_register(array('AutoLoader', 'loadClass'));
+spl_autoload_register(array('Arret_AutoLoader', 'loadClass'));

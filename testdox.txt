@@ -1,0 +1,55 @@
+Arrange
+ [x] Arrange array from table
+ [x] Is arret a publication
+ [x] Is not arret a publication
+ [x] Format date from string
+ [x] Unique array
+
+Database
+ [x] Soundex similar category
+ [x] Arrange arret with infos
+ [x] Arrange arret for insert
+ [x] Arrange subcategorie for insert
+ [x] Insert new arret in database
+ [x] Insert new subcategory
+ [x] Category dont exist in db
+ [x] Category exist in db
+ [x] Inser new category in db
+
+Date
+ [x] Last day in db is today
+
+Grab
+ [x] Get title o f page
+
+Nouveautes
+ [ ] Get arret list
+ [x] Dispatch arrets for user
+ [ ] Get categories list
+ [x] Is publication
+ [x] Is not publication
+ [x] Format keywords for search in arret
+ [x] Arrets in search
+ [x] Dispatch is pub arret by keyword found
+ [x] Dispatch is pub arret by keyword but not found
+ [x] Dispatch is pub arret by keyword but not all found
+ [x] Dispatch arret is pub no keywords
+ [x] Dispatchh arret no keywords
+ [x] Clean user array
+
+Search
+ [x] Prepare search for query
+
+Update
+ [x] Update text arret
+
+User
+ [x] Get all user abos publication category
+ [x] Get all user abos
+
+Utils
+ [x] Clean string simple
+ [x] Clean string database
+ [x] Percentage similar string
+ [x] Flatten array
+

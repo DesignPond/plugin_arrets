@@ -43,17 +43,32 @@ if ( ! defined( 'WPINC' ) ) {
  */
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-dd-arrets.php' );
 
+// bootstrap classes
+require_once( plugin_dir_path( __FILE__ ) . 'bootstrap.php' );
+
 /*
  * Register hooks that are fired when the plugin is activated or deactivated.
  * When the plugin is deleted, the uninstall.php file is loaded.
  *
- * @TODO:
- *
- * - replace DD_Arrets with the name of the class defined in
- *   `class-plugin-name.php`
  */
 register_activation_hook( __FILE__, array( 'DD_Arrets', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'DD_Arrets', 'deactivate' ) );
+
+
+// Add cron job for sending alertes
+register_activation_hook( __FILE__  , 'add_alerte_schedule' );
+register_deactivation_hook( __FILE__, 'clear_alerte_schedule');
+
+// Hook crons
+function add_alerte_schedule()
+{
+	wp_schedule_event( time(), 'daily', 'dd_daily_alert' );
+}
+
+function clear_alerte_schedule()
+{
+	wp_clear_scheduled_hook('dd_daily_alert');
+}
 
 /*
  * @TODO:
@@ -62,6 +77,11 @@ register_deactivation_hook( __FILE__, array( 'DD_Arrets', 'deactivate' ) );
  *   `class-plugin-name.php`
  */
 add_action( 'plugins_loaded', array( 'DD_Arrets', 'get_instance' ) );
+
+/**
+ * Custom shortcodes for plugin
+*/
+// add_shortcode('unsuscribe_newsletter', array( 'DD_Arrets', 'unsuscribe_newsletter_shortcode' ) );
 
 /*----------------------------------------------------------------------------*
  * Dashboard and Administrative Functionality

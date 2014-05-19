@@ -1,6 +1,8 @@
 <?php
 
-require_once( '/Applications/MAMP/htdocs/praticien/wp-content/plugins/new-arret-plugin/simple_html_dom.php');
+$path = dirname(dirname(__FILE__)).'/includes/';
+
+require_once( $path.'/simple_html_dom.php');
 
 class GrabTest extends PHPUnit_Framework_TestCase
 {

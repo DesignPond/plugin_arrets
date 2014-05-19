@@ -8,7 +8,7 @@ class Log{
 	
 		$today = date('Y-m-d');
 		
-		$filename = plugin_dir_path(  dirname(__FILE__)  ) . 'logs/log_'.$today.'.txt';
+		$filename = plugin_dir_path(  dirname(dirname(__FILE__) ) ) . 'logs/log_'.$today.'.txt';
 										
 		$fh = fopen($filename, 'w');
 				
