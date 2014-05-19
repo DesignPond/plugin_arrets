@@ -27,8 +27,9 @@ class Arrange {
 	
 	public function arrangeArray($array){
 
-		$count = count($array);
-		$nbr   = $count/2;
+		$count    = count($array);
+		$nbr      = $count/2;
+		$arranged = array();
 
 		for ($i= 0 ; $i < $nbr; $i++) 
 		{

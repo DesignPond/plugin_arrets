@@ -1,10 +1,5 @@
 <?php
 
-require_once(plugin_dir_path(  dirname(__FILE__)  ) . 'classes/Grab.php');
-require_once(plugin_dir_path(  dirname(__FILE__)  ) . 'classes/Database.php');
-require_once(plugin_dir_path(  dirname(__FILE__)  ) . 'classes/Search.php');
-require_once(plugin_dir_path(  dirname(__FILE__)  ) . 'classes/Log.php');
-
 class Update{
 
 	// Get classes		
@@ -35,9 +30,9 @@ class Update{
 		// Get classes		
 		$this->grab     = new Grab;
 		
-		$this->database = new Database(true);
+		$this->database = new Database($test);
 		
-		$this->search   = new Search;
+		$this->search   = new Search($test);
 		
 		$this->log      = new Log;
 		
@@ -57,7 +52,18 @@ class Update{
 						
 	}
 	
+	/**
+	 * MAIN FUNCTION
+	*/
 	public function initUpdate(){
+	
+		/*
+			Return values			
+			0 or false 
+			1 or true
+			2 : problem for date
+			3 : nothing to update			
+		*/
 	
 		// Get arrets and dates to update
 		$arrets = $this->getArretsToUpdate();
@@ -70,11 +76,11 @@ class Update{
 				if( $this->updateTextArret($update) )
 				{					
 					// Pass date to updated					
-					$this->dateIsUpdated($date);				
+					return $this->dateIsUpdated($date);				
 				}
 				else
 				{
-					echo 'Danger!! Danger!!';
+					return 2;
 										
 					 // LOGGING
 					$this->log->write('Problème with update of arret for date : '.$date);
@@ -84,7 +90,7 @@ class Update{
 		}
 		else
 		{
-			echo 'Nothing to update';
+			return 3;
 			// LOGGING
 			$this->log->write('Nothing to update : '.$date);
 			// END LOGGIN	

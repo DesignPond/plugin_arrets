@@ -1,9 +1,5 @@
 <?php 
 
-require_once(plugin_dir_path(  dirname(__FILE__)  ) . 'classes/Utils.php');
-require_once(plugin_dir_path(  dirname(__FILE__)  ) . 'classes/Grab.php');
-require_once(plugin_dir_path(  dirname(__FILE__)  ) . 'classes/Log.php');
-
 class Database{
 	
 	// DB tables

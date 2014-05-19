@@ -10,7 +10,7 @@ class Dates {
 
 	function __construct( $test = null) {
 		
-		$this->nouveautes_table = 'wp_nouveautes_test';
+		$this->nouveautes_table = ( $test ? 'wp_nouveautes_test' : 'wp_nouveautes' );
 			
 		$this->urlArret         = 'http://relevancy.bger.ch/php/aza/http/index.php?lang=fr&zoom=&type=show_document&highlight_docid=aza%3A%2F%2F';
 	}
@@ -30,6 +30,28 @@ class Dates {
 		$date = ( !empty($lastDate) ? $lastDate->datep_nouveaute : '');
 		
 		return $date;
+	}
+	
+	public function lastDateToInsert($list){
+		
+		// Get first date of list from TF, has to be the last update if the time is right , I still don't know when exactly they're making updates
+		$date = array_shift($list);
+		
+		$last = $this->lastDayInDb();
+		
+		if(!empty($last))
+		{
+			$last = strtotime($last);
+			$last = date("ymd", $last);				
+			
+			if( $this->isToday($date) && ($date > $last) )
+			{
+				return true;
+			}				
+		}
+		
+		return false;
+		
 	}
 	
 	// 
@@ -71,6 +93,12 @@ class Dates {
 		}
 
 		return $toUpdate;		
+	}
+	
+	public function validateDate($date)
+	{
+	    $d = DateTime::createFromFormat('Y-m-d', $date);
+	    return $d && $d->format('Y-m-d') == $date;
 	}
 				
 }

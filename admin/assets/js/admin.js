@@ -3,7 +3,7 @@
 
 	$(function () {
 
-		// Place your administration-specific JavaScript here
+		$( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' , altFormat: "ymmdd" ,altField: "#inser-date-format" });
 
 	});
 

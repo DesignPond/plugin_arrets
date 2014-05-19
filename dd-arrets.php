@@ -36,10 +36,7 @@ if ( ! defined( 'WPINC' ) ) {
  *----------------------------------------------------------------------------*/
 
 /*
- * @TODO:
- *
- * - replace `class-plugin-name.php` with the name of the plugin's class file
- *
+ * Require plugin main class
  */
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-dd-arrets.php' );
 

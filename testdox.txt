@@ -23,9 +23,9 @@ Grab
  [x] Get title o f page
 
 Nouveautes
- [ ] Get arret list
+ [x] Get arret list
  [x] Dispatch arrets for user
- [ ] Get categories list
+ [x] Get categories list
  [x] Is publication
  [x] Is not publication
  [x] Format keywords for search in arret

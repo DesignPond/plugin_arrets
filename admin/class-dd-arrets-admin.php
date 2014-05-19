@@ -8,16 +8,12 @@
  * @link      http://example.com
  * @copyright 2014 Your Name or Company Name
  */
+ 
+// bootstrap classes
+ 
+include_once( plugin_dir_path( dirname(__FILE__ ) ) . 'bootstrap.php');
 
 /**
- * Plugin class. This class should ideally be used to work with the
- * administrative side of the WordPress site.
- *
- * If you're interested in introducing public-facing
- * functionality, then refer to `class-plugin-name.php`
- *
- * @TODO: Rename this class to a proper name for your plugin.
- *
  * @package DD_Arrets_Admin
  * @author  Your Name <email@example.com>
  */
@@ -140,6 +136,7 @@ class DD_Arrets_Admin {
 		$screen = get_current_screen();
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
 			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), DD_Arrets::VERSION );
+			wp_enqueue_style( 'jquery.ui.theme', plugins_url( 'assets/css/jquery-ui.css', __FILE__ ), array(), DD_Arrets::VERSION );
 		}
 
 	}
@@ -164,6 +161,8 @@ class DD_Arrets_Admin {
 		$screen = get_current_screen();
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
 			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), DD_Arrets::VERSION );
+			wp_enqueue_script('jquery-ui-core');
+			wp_enqueue_script('jquery-ui-datepicker');
 		}
 
 	}

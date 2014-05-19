@@ -1,9 +1,5 @@
 <?php 
 
-require_once(plugin_dir_path(  dirname(__FILE__)  ) . 'classes/Utils.php');
-require_once(plugin_dir_path(  dirname(__FILE__)  ) . 'classes/Search.php');
-require_once(plugin_dir_path(  dirname(__FILE__)  ) . 'classes/Log.php');
-
 class User {
 
 	// DB tables
@@ -36,7 +32,7 @@ class User {
 		// Set classes		
 		$this->utils   = new Utils;
 
-		$this->search  = new Search();
+		$this->search  = new Search($test);
 		
 		$this->log     = new Log;
 		

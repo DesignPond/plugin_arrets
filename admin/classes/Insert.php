@@ -1,11 +1,5 @@
 <?php
 
-require_once(plugin_dir_path(  dirname(__FILE__)  ) . 'classes/Grab.php');
-require_once(plugin_dir_path(  dirname(__FILE__)  ) . 'classes/Dates.php');
-require_once(plugin_dir_path(  dirname(__FILE__)  ) . 'classes/Arrange.php');
-require_once(plugin_dir_path(  dirname(__FILE__)  ) . 'classes/Database.php');
-require_once(plugin_dir_path(  dirname(__FILE__)  ) . 'classes/Log.php');
-
 class Insert{
 
 	protected $grab;
@@ -26,7 +20,7 @@ class Insert{
 		// Get classes		
 		$this->grab     = new Grab;
 		
-		$this->dates    = new Dates;
+		$this->dates    = new Dates($test);
 				
 		$this->arrange  = new Arrange;
 		
@@ -37,9 +31,55 @@ class Insert{
 		// Urls		
 		$this->urlList = 'http://relevancy.bger.ch/AZA/liste/fr/';
 						
+	}	
+	
+	/**
+	 * MAIN FUNCTION
+	 * Insert arrets for corresponding date => format ymmdd (ex:821001 my birtday!)
+	*/
+	public function insertForDate($date){
+		
+		// Grab list of arrets for the date in list															
+		$arrets = $this->grab->getListDecisions($this->urlList, $date);	
+		
+		// Clean all arrets for each date
+		$result = $this->arrange->cleanFormat($arrets , $date);
+		
+		// Update category list in DB				
+		if(!empty($result['allCategories']))
+		{
+			$this->database->existCategorie($result['allCategories']);
+		}
+
+		// Prepare arrets
+		if(!empty($result['allArrets']))
+		{
+			$arranged = $this->database->arrangeArret($result['allArrets']);			
+		}	
+
+		if(!empty($arranged))
+		{
+			// Insert new arrets
+			if( ! $this->database->insertNewArrets($arranged) )
+			{
+				return false;
+			}		
+						
+			return true;
+			
+			// LOGGING
+			$this->log->write('All arret inserted for date '.$date.'');
+		 	// END LOGGIN				
+		}	
+		
+		return false;	
+		
 	}
 	
-	public function insert(){
+	/**
+	 * Get missing dates from TF
+	*/
+	public function insertMissingDates(){
 		
 		$arrets   = array();
 		$arranged = array();
@@ -54,36 +94,10 @@ class Insert{
 		{
 			foreach($toInsert as $list)
 			{	
-				// Grab list of arrets for the date in list															
-				$arrets = $this->grab->getListDecisions($this->urlList, $list);	
-				
-				// Clean all arrets for each date
-				$result = $this->arrange->cleanFormat($arrets , $list);
-				
-				// Update category list in DB				
-				if(!empty($result['allCategories']))
+				if(!$this->insertForDate($list))
 				{
-					$this->database->existCategorie($result['allCategories']);
+					return false;	
 				}
-
-				// Prepare arrets
-				if(!empty($result['allArrets']))
-				{
-					$arranged = $this->database->arrangeArret($result['allArrets']);			
-				}	
-
-				if(!empty($arranged))
-				{
-					// Insert new arrets
-					if( $this->database->insertNewArrets($arranged) === false)
-					{
-						return false;
-					}	
-					
-					// LOGGING
-					$this->log->write('All arret inserted for date '.$list.'');
-				 	// END LOGGIN					
-				}		
 			}
 			
 			return true;
@@ -94,6 +108,7 @@ class Insert{
 		// END LOGGIN	
 
 		return false;	
-	}	
+	}
+	
 	
 }
