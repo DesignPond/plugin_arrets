@@ -48,18 +48,59 @@ class Nouveautes {
 	  Main functions
 	============================================*/
 	
+	/**
+	 * Nouveautes query with categories and subcategories names
+	*/
+	public function nouveautesQuery($limit = NULL, $offset = 0 , $orderby = 'datep_nouveaute', $order = 'asc'){
+
+		global $wpdb;
+		
+		$query = 'SELECT '.$this->nouveautes_table.'.id_nouveaute , 
+												 '.$this->nouveautes_table.'.datep_nouveaute , 
+												 '.$this->nouveautes_table.'.dated_nouveaute , 
+												 '.$this->nouveautes_table.'.categorie_nouveaute , 
+												 '.$this->nouveautes_table.'.link_nouveaute , 
+												 '.$this->nouveautes_table.'.numero_nouveaute , 
+												 '.$this->nouveautes_table.'.publication_nouveaute , 
+												 '.$this->categories_table.'.name as nameCat , 
+												 '.$this->subcategories_table.'.name as nameSub 
+										  FROM '.$this->nouveautes_table.' 
+										  JOIN '.$this->categories_table.'  on '.$this->categories_table.'.term_id  = '.$this->nouveautes_table.'.categorie_nouveaute 
+										  LEFT JOIN '.$this->subcategories_table.' on '.$this->subcategories_table.'.refNouveaute = '.$this->nouveautes_table.'.id_nouveaute';
+	
+		$query .= ' ORDER BY '.$orderby.' '.$order;		
+		
+		if($limit)
+		{
+			$query .= ' LIMIT '.$offset.' , '.$limit;
+		}					  
+		
+		$listArrets = $wpdb->get_results($query);
+										  
+		return $listArrets;	
+	}
+	
+	public function getAllNouveautes(){
+
+		global $wpdb;
+				
+		$arrets_count = $wpdb->get_var( 'SELECT COUNT(*) FROM '.$this->nouveautes_table );
+		
+		return $arrets_count;
+	}
+	
 	/*
 	 * Get all arrets for date
 	 * @return array
 	*/
 	public function getArretsAndCategoriesForDates($date){
-	
+		
 		global $wpdb;
 		
 		$categories = array();
 		$arrets     = array();
 		$new        = array();
-		
+			
 		// Find if we passed a single date or a range	
 		$when = ( is_array($date) ? ' BETWEEN "'.$date[0].'" AND "'.$date[1].'"' : ' = "'.$date.'"' );
 		
@@ -75,7 +116,7 @@ class Nouveautes {
 										  FROM '.$this->nouveautes_table.' 
 										  JOIN '.$this->categories_table.'  on '.$this->categories_table.'.term_id  = '.$this->nouveautes_table.'.categorie_nouveaute 
 										  LEFT JOIN '.$this->subcategories_table.' on '.$this->subcategories_table.'.refNouveaute = '.$this->nouveautes_table.'.id_nouveaute 
-										  WHERE '.$this->nouveautes_table.'.datep_nouveaute '.$when.'');	
+										  WHERE '.$this->nouveautes_table.'.datep_nouveaute '.$when.'');
 
 		if(!empty($listArrets))
 		{
@@ -100,6 +141,7 @@ class Nouveautes {
 		
 		return array( 'arrets' => $arrets , 'categories' => $categories );										  
 	}
+	
 	
 	// Get 5 last week days
 	public function getWeekDays(){

@@ -36,6 +36,9 @@ class DD_Arrets_Admin {
 	 * @var      string
 	 */
 	protected $plugin_screen_hook_suffix = null;
+	
+	
+	protected $nouveautes;
 
 	/**
 	 * Initialize the plugin by loading admin scripts & styles and adding a
@@ -71,7 +74,8 @@ class DD_Arrets_Admin {
 
 		// Add the options page and menu item.
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
-		
+		add_action( 'admin_menu', array( $this, 'add_plugin_arrets_page' ) );
+				
 		// Settings for plugin
 		add_action( 'admin_init', array( $this, 'register_dd_arrets_settings' ) );		
 
@@ -79,14 +83,12 @@ class DD_Arrets_Admin {
 		$plugin_basename = plugin_basename( plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . $this->plugin_slug . '.php' );
 		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 
-		/*
-		 * Define custom functionality.
-		 *
-		 * Read more about actions and filters:
-		 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
-		 */
-		//add_action( '@TODO', array( $this, 'action_method_name' ) );
-		//add_filter( '@TODO', array( $this, 'filter_method_name' ) );
+		// Custom classes fot plugin
+		
+		// Mode live or test
+		$mode = get_option('dd_arrets_mode'); 
+		
+		$this->nouveautes = new Nouveautes($mode);	
 
 	}
 
@@ -169,7 +171,7 @@ class DD_Arrets_Admin {
 
 	/**
 	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
-	 *
+	 * Administration Menus: http://codex.wordpress.org/Administration_Menus
 	 * @since    1.0.0
 	 */
 	public function add_plugin_admin_menu() {
@@ -180,15 +182,8 @@ class DD_Arrets_Admin {
 		 * NOTE:  Alternative menu locations are available via WordPress administration menu functions.
 		 *
 		 *        Administration Menus: http://codex.wordpress.org/Administration_Menus
-		 *
-		 * @TODO:
-		 *
-		 * - Change 'Page Title' to the title of your plugin admin page
-		 * - Change 'Menu Text' to the text for menu item for the plugin settings page
-		 * - Change 'manage_options' to the capability you see fit
-		 *   For reference: http://codex.wordpress.org/Roles_and_Capabilities
 		 */
-		$this->plugin_screen_hook_suffix = add_options_page(
+		$this->plugin_screen_hook_suffix = add_menu_page(
 			__( 'Nouveaux arrêts', $this->plugin_slug ),
 			__( 'Nouveaux arrêts', $this->plugin_slug ),
 			'manage_options',
@@ -198,6 +193,19 @@ class DD_Arrets_Admin {
 
 	}
 	
+	public function add_plugin_arrets_page(){
+		
+		$this->plugin_screen_hook_suffix = add_submenu_page(
+			$this->plugin_slug,
+			__( 'Liste des arrêts', $this->plugin_slug ),
+			__( 'Liste des arrêts', $this->plugin_slug ),
+			'manage_options', 
+			$this->plugin_slug.'-liste',
+			array( $this, 'display_plugin_arrets_page' )
+		);
+		
+	}
+	
 	public function register_dd_arrets_settings(){
 	    //register our settings
 	    register_setting( 'dd-arrets-settings-group', 'dd_arrets_mode' );	
@@ -205,6 +213,15 @@ class DD_Arrets_Admin {
 
 	/**
 	 * Render the settings page for this plugin.
+	 *
+	 * @since    1.0.0
+	 */
+	public function display_plugin_arrets_page() {
+		include_once( 'views/list.php' );
+	}
+	
+	/**
+	 * Render the list of arrets page for this plugin.
 	 *
 	 * @since    1.0.0
 	 */

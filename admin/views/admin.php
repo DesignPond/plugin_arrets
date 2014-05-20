@@ -67,7 +67,7 @@
 	    
 	    <table class="form-table">
 	        <tr valign="top">
-	        <th scope="row">Mode (test ou live)</th>
+	        <th scope="row">Mode (test ou null/rien)</th>
 	        <td><input type="text" name="dd_arrets_mode" value="<?php echo get_option('dd_arrets_mode'); ?>" /></td>
 	        </tr>
 	    </table>
@@ -75,9 +75,11 @@
 	    <?php submit_button(); ?>
 	
 	</form>
+	<br/>
 	
 	<h3>Date dernière mise à jour</h3>
 	<p><strong><?php echo $dd_dates->lastDayInDb(); ?></strong></p>
+	<br/>
 	
 	<h3>Insérer date</h3>
 	
@@ -96,22 +98,5 @@
 		</table>	
 	
 	</form>
-	
-	<?php
-	
-		$list = $dd_grab->getLastDates('http://relevancy.bger.ch/AZA/liste/fr/');
-		
-		$list = array('140518');
-		
-		if($dd_dates->lastDateToInsert($list))
-		{
-			echo 'ok pour mettre la date a jour';
-		}
-		else
-		{
-			echo 'pas a mettre a jour';
-		}
-		
-	?>	
 	
 </div>
