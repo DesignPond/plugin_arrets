@@ -202,7 +202,11 @@ class Nouveautes {
 					if( isset($arrets[$idCat]) )
 					{
 						// Get list of arrets for current category
-						$list = $arrets[$idCat];
+						$list = $arrets[$idCat];						
+									
+						echo '<pre>';
+						print_r($list);
+						echo '</pre>';
 					
 						// search in arrets
 						$listArrets = $this->dispatchArretWithKeyword($list, $keywords , $isPub);
@@ -231,12 +235,14 @@ class Nouveautes {
 		if(!empty($arrets))
 		{		
 			foreach($arrets as $arret)
-			{				
+			{
+				$this->log->write('New arret inserted : '.$arret['id_nouveaute']);
+									
 				// Test if is pub or/and keywords found				
 				if( ($isPub && $this->isPub($arret)) || !$isPub )
 				{					
 					if($keywords)
-					{
+					{					
 						$result = $this->arretsInSearch($keywords,$arret['id_nouveaute']);
 						
 						if(!empty($result))
@@ -249,6 +255,7 @@ class Nouveautes {
 						$listIds[$arret['id_nouveaute']] = NULL;
 					}		
 				}
+				
 			}
 		}
 		

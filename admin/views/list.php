@@ -14,6 +14,8 @@
  $dd_nouveautes = new Nouveautes($mode);
  $dd_utils      = new Utils();
  
+ $dd_user       = new User($mode);
+ 
  $list = $dd_nouveautes->nouveautesQuery(15);
  
  $list = $dd_utils->objectToArray($list);
@@ -32,6 +34,44 @@
 
 	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 	
-	<?php $testListTable->display(); ?>
+	<?php 
+	
+		// $testListTable->display(); 
+		
+		// What day is it
+		$currentday = date("N");
+		
+		// If it's friday friday! we need all week date range to
+		if($currentday == 3)
+		{
+			// Get days
+			$week_days   = $dd_nouveautes->getWeekDays();
+			
+			// Get arrets for week
+			$week_arrets = $dd_nouveautes->getArretsAndCategoriesForDates($week_days);
+			
+			// Get users for week
+			$week_users  = $dd_user->getUserAbos('all');
+			
+			// Assign arrets
+			$list = $dd_nouveautes->assignArretsUsers($week_users, $week_arrets);
+			
+			// Clean users with id
+			//$list = $dd_nouveautes->cleanEachUser($list); 
+			
+			echo '<pre>';
+			print_r($list);
+			echo '</pre>';
+		}
+
+		
+		// Users
+		// Arrets
+					
+		//$list = $dd_nouveautes->assignArretsUsers($users, $arrets);
+		//$list = $dd_nouveautes->cleanEachUser($list); 
+					
+		
+	?>
 	
 </div>
