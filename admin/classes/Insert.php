@@ -29,7 +29,9 @@ class Insert{
 		$this->database = new Database($test);
 				
 		// Urls		
-		$this->urlList = 'http://relevancy.bger.ch/AZA/liste/fr/';
+		$root = 'http://relevancy.bger.ch/AZA/liste/fr/';
+		
+		$this->urlList  = ( get_option('dd_arrets_url_list') ? get_option('dd_arrets_url_list') : $root ); 
 						
 	}	
 	

@@ -11,8 +11,11 @@ class Dates {
 	function __construct( $test = null) {
 		
 		$this->nouveautes_table = ( $test ? 'wp_nouveautes_test' : 'wp_nouveautes' );
-			
-		$this->urlArret         = 'http://relevancy.bger.ch/php/aza/http/index.php?lang=fr&zoom=&type=show_document&highlight_docid=aza%3A%2F%2F';
+		
+		$url  = 'http://relevancy.bger.ch/php/aza/http/index.php?lang=fr&zoom=&type=show_document&highlight_docid=aza%3A%2F%2F';
+		
+		$this->urlArret = ( get_option('dd_newsletter_url_arret') ? get_option('dd_newsletter_url_arret') : $url ); 
+
 	}
 	 	 	
 	/* ===============================================
@@ -34,7 +37,7 @@ class Dates {
 	
 	public function lastDateToInsert($list){
 		
-		// Get first date of list from TF, has to be the last update if the time is right , I still don't know when exactly they're making updates
+		// Get first date of list from TF, has to be the last update if the time is right , I still don't know when exactly they are making updates :(
 		$date = array_shift($list);
 		
 		$last = $this->lastDayInDb();
@@ -46,7 +49,9 @@ class Dates {
 			
 			if( $this->isToday($date) && ($date > $last) )
 			{
-				return true;
+				$d = DateTime::createFromFormat('ymd', $date);
+				
+				return $d->format('Y-m-d');
 			}				
 		}
 		

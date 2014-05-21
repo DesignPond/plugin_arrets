@@ -7,12 +7,18 @@ class Grab {
 	protected $html;
 	
 	protected $user_agent;
+	
+	protected $urlList;
 
 	function __construct() {
 	
 		$this->html = new simple_html_dom();
 		
 		$this->user_agent = "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)";
+		
+		$root = 'http://relevancy.bger.ch/AZA/liste/fr/';
+		
+		$this->urlList  = ( get_option('dd_arrets_url_list') ? get_option('dd_arrets_url_list') : $root ); 
 		
 	}	
 
@@ -115,7 +121,7 @@ class Grab {
 	
 	public function getLastDates($url){
 		
-		$url  = 'http://relevancy.bger.ch/AZA/liste/fr/';
+		$url  = $this->urlList;
 		
 		$html = $this->getPage($url);		
 		

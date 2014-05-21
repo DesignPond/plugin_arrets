@@ -1,1 +1,18 @@
 /* This stylesheet is used to style the admin option form of the plugin. */
+
+.dd_width_big{
+	width: 300px;
+}
+
+	.dd_width_big input{
+		width: 300px;
+	}
+
+
+.dd_width_small{
+	width: 200px;
+}
+
+	.dd_width_small input{
+		width: 200px;
+	}

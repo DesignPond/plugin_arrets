@@ -46,9 +46,13 @@ class Update{
 		$this->updated_table       = 'wp_updated';
 		
 		// Urls
-		$this->urlRoot  = 'http://relevancy.bger.ch';
-				
-		$this->urlArret = 'http://relevancy.bger.ch/php/aza/http/index.php?lang=fr&zoom=&type=show_document&highlight_docid=aza%3A%2F%2F';
+		$root = 'http://relevancy.bger.ch';
+		
+		$url  = 'http://relevancy.bger.ch/php/aza/http/index.php?lang=fr&zoom=&type=show_document&highlight_docid=aza%3A%2F%2F';
+		
+		$this->urlArret = ( get_option('dd_newsletter_url_arret') ? get_option('dd_newsletter_url_arret') : $url ); 
+		
+		$this->urlRoot  = ( get_option('dd_newsletter_url') ? get_option('dd_newsletter_url') : $root ); 
 						
 	}
 	

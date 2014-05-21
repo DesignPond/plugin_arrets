@@ -77,7 +77,13 @@ class DD_Arrets_Admin {
 		add_action( 'admin_menu', array( $this, 'add_plugin_arrets_page' ) );
 				
 		// Settings for plugin
-		add_action( 'admin_init', array( $this, 'register_dd_arrets_settings' ) );		
+		add_action( 'admin_init', array( $this, 'register_dd_arrets_settings' ) );
+		
+		add_action( 'admin_init', array( $this, 'register_url_list' ) );	
+		
+		add_action( 'admin_init', array( $this, 'register_url_arret' ) );
+		
+		add_action( 'admin_init', array( $this, 'register_url' ) );			
 
 		// Add an action link pointing to the options page.
 		$plugin_basename = plugin_basename( plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . $this->plugin_slug . '.php' );
@@ -193,6 +199,20 @@ class DD_Arrets_Admin {
 	public function register_dd_arrets_settings(){
 	    //register our settings
 	    register_setting( 'dd-arrets-settings-group', 'dd_arrets_mode' );	
+	}
+	
+	public function register_url_list(){
+		register_setting( 'dd-arrets-url-list', 'dd_arrets_url_list' );	
+	}
+	
+	public function register_url_arret() {
+	    //register our settings
+	    register_setting( 'dd-newsletter-url-arret', 'dd_newsletter_url_arret' );
+	}
+	
+	public function register_url() {
+	    //register our settings
+	    register_setting( 'dd-newsletter-url', 'dd_newsletter_url' );
 	}
 
 	/**
