@@ -97,7 +97,7 @@
 			
 			foreach($everything as $user => $arrets){
 				
-				echo $dd_html->setEmailHtml($user,$arrets);
+				echo $dd_html->setAlerteHtml($user,$arrets);
 				
 			}
 			

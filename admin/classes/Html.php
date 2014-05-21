@@ -57,19 +57,9 @@ class Html{
 		 	
 		 $urlRoot   = home_url('/');
 		 $pageRoot  = 1143;
-		 $userInfos = get_user_meta($user); 
-
-		 $nom    = ''; 
-		 $prenom = '';	
 		 
-		 if( isset($userInfos['last_name'][0]) )
-		 {
-			 $nom = $userInfos['last_name'][0]; 
-		 }
-		 if( isset($userInfos['first_name'][0]) )
-		 {
-			 $prenom = $userInfos['first_name'][0];
-		 }
+		 $first_name = get_user_meta($user,'first_name',true);
+		 $last_name  = get_user_meta($user,'last_name',true);
 
 		 // Wrapper 
 		 $html .= '<table align="center" style="border:1px solid #dddddd;background:#ffffff;font-family:arial,sans serif; padding:5px; margin:0; width:720px; display:block;">';
@@ -83,7 +73,7 @@ class Html{
 		 $html .= '</table>'; 
 		 
 		 $html .= '<p style="color:#000; font-size:15px; margin-bottom:20px;font-family:arial,sans serif; line-height:20px; ">Bonjour';
-		 $html .= '<strong> '.$prenom. ' ' .$nom.'</strong>';
+		 $html .= '<strong> '.$first_name. ' ' .$last_name.'</strong>';
 		 $html .= ',<br/>Voici les derniers arr&ecirc;ts correspondant &agrave; vos abonnements</p>';
 		 
 		 // Debut du mail
@@ -126,6 +116,30 @@ class Html{
 		 
 		 return $html;
 		 
+	}
+	
+	public function setAlerteHtml($user, $list){
+		
+		 global $wpdb;
+		 	
+		 $urlRoot   = home_url('/');
+		 $pageRoot  = 1143;
+		 	 
+		 $first_name = get_user_meta($user,'first_name',true);
+		 $last_name  = get_user_meta($user,'last_name',true);
+		 
+		 // Start buffer!!!
+		 ob_start();
+		 
+		 // include header
+		 include( plugin_dir_path( dirname(dirname( __FILE__ ) ) ).'/public/views/header-alertes.php');
+		 
+		 include( plugin_dir_path( dirname(dirname( __FILE__ ) ) ).'/public/views/footer-alertes.php');
+		 
+		 $content = ob_get_clean();
+		 
+		 return $content;
+
 	}
 	
 	// Get infos for id arret
