@@ -58,6 +58,31 @@ class Dates {
 		return false;
 		
 	}
+
+	
+	public function lastDateToSend($list){
+		
+		// Get first date of list from TF, has to be the last update if the time is right , I still don't know when exactly they are making updates :(
+		$date = array_shift($list);
+		
+		$last = $this->lastDayInDb();
+		
+		if(!empty($last))
+		{
+			$last = strtotime($last);
+			$last = date("ymd", $last);				
+			
+			if( $this->isToday($date) )
+			{
+				$d = DateTime::createFromFormat('ymd', $date);
+				
+				return $d->format('Y-m-d');
+			}				
+		}
+		
+		return false;
+		
+	}
 	
 	// 
 	public function isToday($date){

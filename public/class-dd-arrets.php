@@ -64,10 +64,14 @@ class DD_Arrets {
 	protected $nouveautes;
 	
 	protected $user;
+	
+	protected $html;
 
 	protected $sendalert;
 	
 	protected $log;
+	
+	protected $urlList;
 
 	/**
 	 * Initialize the plugin by setting localization and loading public scripts
@@ -95,6 +99,10 @@ class DD_Arrets {
 
 		// Custom classes fot plugin
 		
+		$root = 'http://relevancy.bger.ch/AZA/liste/fr/';
+		
+		$this->urlList  = ( get_option('dd_arrets_url_list') ? get_option('dd_arrets_url_list') : $root ); 
+		
 		// Mode live or test
 		$mode = get_option('dd_arrets_mode'); 
 		
@@ -109,8 +117,10 @@ class DD_Arrets {
 		$this->nouveautes = new Nouveautes($mode);	
 
 		$this->user       = new User($mode);
+
+		$this->html       = new Html($mode);	
 		
-		//$this->sendalert  = new Sendalert();	
+		$this->sendalert  = new Sendalert();	
 						
 		$this->log        = new Log();
 
@@ -362,55 +372,59 @@ class DD_Arrets {
 	 */	
 	public function send_alertes(){
 
-		/*
 		// What day is it
 		$currentday = date("N");
 
 		// Get date to update
 		// See if it's today and not in the database already
-		// Should see if everything is updated to...
-		$last = $this->grab->getLastDates($urlRoot);
-		$date = $this->dates->lastDateToInsert($last);
+		// Should see if everything is updated to... and if it's not sent already
+		$last = $this->grab->getLastDates($this->urlList);
+		$date = $this->dates->lastDateToSend($last);
 		
 		$abos = $this->sendalert->prepareAlert($date,$currentday);
-		*/
 		
-		/*
-		 * Get html alert for each abos
-		*/
-		/*
+		$this->goSendAlertes($abos);
+
+	}
+	
+	/*
+	 * Everything ok! Send alertes
+	*/
+	public function goSendAlertes($abos){
+
 		if(!empty($abos))
 		{			
 			foreach($abos as $user => $arrets)
-			{				
+			{	
+				// Get body of alerte email			
 				$body_html = $this->html->setAlerteHtml($user,$arrets);	
-				
+				// Send with elasticemail and get result
 				$result    = $this->sendalert->prepareSend($user , $body_html);
-				
+				// Se if we have an id for send
 				$alerte_id = $this->sendalert->testIdSend($result);
 		
 				if($alerte_id)
 				{
 					// Alerte is send!  Update database with infos
-					$this->updateNewsletterIsSend($alerte_id,$email);
-
+					$this->updateNewsletterIsSend($alerte_id,$user);
 				}
 			}			
 		}	
-		*/
-
-	}
 		
+		wp_mail('cindy.leschaud@gmail.com', 'Résultat', 'Fin envoi alertes ');
+	
+	}
+			
 	/*
 	 * Insert log alert send to email 
 	*/
-	public function updateNewsletterIsSend($alerte_id,$email){
+	public function updateNewsletterIsSend($alerte_id,$user){
 		
 		global $wpdb;
 		
 		$table_name = $wpdb->prefix . 'dd_alertes';
 
-	    $wpdb->insert($table_name, array('alerte_id' => $alerte_id,  'send' => date('Y-m-d') , 'email' => $email ));
+	    $wpdb->insert($table_name, array('alerte_id' => $alerte_id,  'send' => date('Y-m-d') , 'user' => $user ));
 		
 	}
 

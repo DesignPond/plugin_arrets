@@ -11,6 +11,8 @@ class Sendalert{
 	protected $nouveautes;
 	
 	protected $user;
+	
+	protected $html;
 
 	protected $sendalert;
 	
@@ -34,8 +36,6 @@ class Sendalert{
 		$this->user       = new User($mode);
 
 		$this->html       = new Html($mode);	
-				
-		$this->sendalert  = new Sendalert();	
 						
 		$this->log        = new Log();
 	
@@ -70,7 +70,7 @@ class Sendalert{
 		}
 				
 		// If it's friday friday! we need all week date range to
-		if($currentday == 3)
+		if($currentday == 5)
 		{
 			// Get 5 last week days
 			$week_days   = $this->nouveautes->getWeekDays();		

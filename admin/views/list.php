@@ -18,6 +18,8 @@
  $dd_user       = new User($mode);
  $dd_html       = new Html($mode);
  
+ $dd_sendalert  = new Sendalert();
+ 
  $list = $dd_nouveautes->nouveautesQuery(15);
  
  $list = $dd_utils->objectToArray($list);
@@ -46,7 +48,7 @@
 	
 	<?php 
 	
-/*
+
 		// $testListTable->display(); 
 		$week_list = array();
 		$day_list  = array();
@@ -59,10 +61,10 @@
 		// See if it's today and not in the database already
 		// Should see if everything is updated to...
 		$last = $dd_grab->getLastDates($urlRoot);
-		$date = $dd_dates->lastDateToInsert($last);
+		$date = $dd_dates->lastDateToSend($last);
 		
 		// Get arrets for day
-		$day_arrets = $dd_nouveautes->getArretsAndCategoriesForDates('2014-04-22');
+		$day_arrets = $dd_nouveautes->getArretsAndCategoriesForDates($date);
 		
 		// Get users for day
 		$day_users  = $dd_user->getUserAbos('all');
@@ -77,7 +79,7 @@
 		}
 				
 		// If it's friday friday! we need all week date range to
-		if($currentday == 3)
+		if($currentday == 4)
 		{
 			// Get 5 last week days
 			$week_days   = $dd_nouveautes->getWeekDays();		
@@ -106,9 +108,7 @@
 
 			}			
 		}
-*/
 		
-
 
 
 	?>

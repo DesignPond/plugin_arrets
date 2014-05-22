@@ -8,20 +8,13 @@ class Html{
 	protected $categories_table;
 	
 	protected $subcategories_table;
-	
-	// classes
-	protected $utils;
-		
-	protected $log;
 		
 	// urls	
 	protected $urlArret;
 	
 	protected $urlRoot;
 
-	function __construct( $test = null ) {
-		
-		// Get classes		
+	function __construct( $test = null ) {	
 		
 		// Set tables		
 		$this->nouveautes_table    = ( $test ? 'wp_nouveautes_test' : 'wp_nouveautes' );
@@ -30,10 +23,6 @@ class Html{
 
 		$this->subcategories_table = ( $test ? 'wp_subcategories_test' : 'wp_subcategories' );
 		
-		// Set classes		
-		$this->utils = new Utils;
-		
-		$this->log   = new Log;
 		
 		// urls
 		$root = 'http://relevancy.bger.ch';
@@ -87,7 +76,7 @@ class Html{
 							<table border="0" width="540" align="center" class="container-middle" cellpadding="0" cellspacing="0">
 								<tr bgcolor="ffffff"><td height="14"></td></tr>	 
 								<tr style="color:#43637c;font-size:13px;font-weight:bold importat!;font-family:Helvetica,Arial,sans-serif;">
-									<td align="left">
+									<td style="color:#43637c;font-size:13px;font-weight:bold importat!;font-family:Helvetica,Arial,sans-serif;" align="left">
 										Bonjour <?php echo $first_name; ?> <?php echo $last_name; ?>,
 										Voici les derniers arrêts correspondant à vos abonnements 
 									</td> 
@@ -112,11 +101,11 @@ class Html{
 						<td>
 		    				<table border="0" width="550" align="center" class="container-middle" cellpadding="0" cellspacing="0">
 								<tr bgcolor="43637c" style="color:#fff;font-size:12px;font-weight:normal importat!;font-family:Helvetica,Arial,sans-serif;">
-									<th width="70" align="left" style="font-weight:normal;">Date de<br/> publication</th>
-									<th width="70" align="left" style="font-weight:normal;">Date de<br/> décision</th>
-									<th width="130" align="left" style="font-weight:normal;">Catégorie</th>
-									<th width="75" align="left" style="font-weight:normal;">Référence</th>
-									<th width="90" align="left" style="font-weight:normal;">Mots clés</th>
+									<th width="70" align="left" style="font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#fff;font-weight:normal;">Date de<br/> publication</th>
+									<th width="70" align="left" style="font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#fff;font-weight:normal;">Date de<br/> décision</th>
+									<th width="130" align="left" style="font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#fff;font-weight:normal;">Catégorie</th>
+									<th width="75" align="left" style="font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#fff;font-weight:normal;">Référence</th>
+									<th width="90" align="left" style="font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#fff;font-weight:normal;">Mots clés</th>
 								</tr>
 							</table>
 						</td>
