@@ -48,82 +48,14 @@ class Html{
 	
 	/**
 	 * Main function to prepare html emails
-	*/
-	public function setEmailHtml($user, $list){
-		
-		 global $wpdb;
-		 
-		 $html = ''; 
-		 	
-		 $urlRoot   = home_url('/');
-		 $pageRoot  = 1143;
-		 
-		 $first_name = get_user_meta($user,'first_name',true);
-		 $last_name  = get_user_meta($user,'last_name',true);
-
-		 // Wrapper 
-		 $html .= '<table align="center" style="border:1px solid #dddddd;background:#ffffff;font-family:arial,sans serif; padding:5px; margin:0; width:720px; display:block;">';
-		 $html .= '<tr>'; 
-		 $html .= '<td>';
-		 
-		 $html .= '<table width="100%" style="border:none; text-align:left; background:#b2c9d7; font-family:arial,sans serif;height:75px;">';
-		 $html .= '<tr valign="middle"><td style="height:50px; display:block;">'; 
-		 $html .= '<h1 style="display:block; padding:0 5px; color:#fff; font-size:25px;"><span style="color:#0f4060;">Droit</span> pour le Praticien</h1>';  
-		 $html .= '</td></tr>'; 
-		 $html .= '</table>'; 
-		 
-		 $html .= '<p style="color:#000; font-size:15px; margin-bottom:20px;font-family:arial,sans serif; line-height:20px; ">Bonjour';
-		 $html .= '<strong> '.$first_name. ' ' .$last_name.'</strong>';
-		 $html .= ',<br/>Voici les derniers arr&ecirc;ts correspondant &agrave; vos abonnements</p>';
-		 
-		 // Debut du mail
-		 $html .= '<table style="border:none; text-align:left; font-family:arial,sans serif; " width="100%">';
-		 $html .= '<tr style="background:#0f4060; text-align:left; color:#ffffff; font-weight:bold;">
-		 		   <th width="75" style="padding:5px;font-size:12px; color:#ffffff;">Date de publication</th>
-				   <th width="75" style="padding:5px;font-size:12px; color:#ffffff;">Date de d&eacute;cision</th>
-				   <th width="150" style="padding:5px;font-size:12px; color:#ffffff;">Cat&eacute;gorie</th>
-				   <th width="185" style="padding:5px;font-size:12px;word-wrap: keep-all ; color:#ffffff;">Sous-cat&eacute;gorie</th>
-				   <th width="60" style="padding:5px; color:#ffffff;font-size:12px;">R&eacute;f&eacute;rence</th>
-				   <th width="175" style="padding:5px; color:#ffffff;font-size:12px;">Mots cl&eacute;s</th>
-				   </tr>';
-				   
-		 // Loop through array of ids
-		 $nouveautes = '';
-		 
-		 foreach($list as $ids => $words)
-		 {
-			 $infosNouveaute = $this->getArret($ids);
-														 
-			 $nouveautes .= '<tr style="background:#f5f5f5; border:1px solid 3ebebeb; text-align:left;">';	
-			 $nouveautes .= '<td style="padding:5px;font-size:13px; color:#343434;text-align:left;">'.$infosNouveaute->datep_nouveaute.'</td>';										  
-			 $nouveautes .= '<td style="padding:5px;font-size:13px; color:#343434;text-align:left;">'.$infosNouveaute->dated_nouveaute.'</td>';
-			 $nouveautes .= '<td style="padding:5px;font-size:13px; color:#343434;text-align:left;">'.$infosNouveaute->nameCat.'</td>';
-			 $nouveautes .= '<td style="padding:5px;font-size:13px; color:#343434;text-align:left;word-break:break-word;">'.$this->utils->limit_words($infosNouveaute->nameSub,8).'</td>';
-			 $nouveautes .= '<td style="padding:5px;font-size:13px; color:#343434;text-align:left;">';
-			 $nouveautes .= '<a style="color:#343434;font-size:13px;" href="'.$urlRoot.'?page_id='.$pageRoot.'&arret='.$infosNouveaute->numero_nouveaute.'"><strong>';
-			 $nouveautes .= $infosNouveaute->numero_nouveaute;
-			 $nouveautes .= '</strong></a></td>';
-			 $nouveautes .= '<td style="padding:5px;font-size:12px; word-break:break-all;color:#343434; text-align:left;">'.$words.'</td>';
-			 $nouveautes .= '</tr>';											 
-		 }
-		 
-		 $html .= $nouveautes;
-		 $html .= '</table>'; 
-		 
-		 // end wrapper
-		 $html .= '</td>'; 
-		 $html .= '</tr></table>'; 
-		 
-		 return $html;
-		 
-	}
-	
+	*/	
 	public function setAlerteHtml($user, $list){
 		
 		 global $wpdb;
 		 	
-		 $urlRoot   = home_url('/');
-		 $pageRoot  = 1143;
+		 $home       = home_url();
+		 $url        = plugins_url().'/dd_arrets/assets/';
+		 $pageRoot   = 1143;
 		 	 
 		 $first_name = get_user_meta($user,'first_name',true);
 		 $last_name  = get_user_meta($user,'last_name',true);
@@ -133,6 +65,102 @@ class Html{
 		 
 		 // include header
 		 include( plugin_dir_path( dirname(dirname( __FILE__ ) ) ).'/public/views/header-alertes.php');
+		 
+		 /* ============================= LOOP  ================================*/
+ 
+		 ?>
+
+		 <!-- ------- main section ------- -->                	
+		 <tr>
+			<td bgcolor="bccfdb">
+				<table border="0" width="560" align="center" cellpadding="0" cellspacing="0" class="container-middle">	                				
+					<tr bgcolor="ffffff"><td height="15"></td></tr>	                			
+					<tr bgcolor="ffffff">
+						<td align="center">
+							<a href="<?php echo $home; ?>">
+								<img style="display: block;" class="main-image" width="538" height="100" src="<?php echo $url; ?>img/main-img-alertes.png" alt="Arrêts du TF" />
+							</a>
+						</td>
+					</tr>	
+					<tr bgcolor="ffffff">
+						<td>
+							<table border="0" width="540" align="center" class="container-middle" cellpadding="0" cellspacing="0">
+								<tr bgcolor="ffffff"><td height="14"></td></tr>	 
+								<tr style="color:#43637c;font-size:13px;font-weight:bold importat!;font-family:Helvetica,Arial,sans-serif;">
+									<td align="left">
+										Bonjour <?php echo $first_name; ?> <?php echo $last_name; ?>,
+										Voici les derniers arrêts correspondant à vos abonnements 
+									</td> 
+								</tr>	
+							</table>
+						</td>
+					</tr>	              				                			
+					<tr bgcolor="ffffff"><td height="15"></td></tr>		                				
+				</table>
+			</td>
+		 </tr>
+		 
+		 <!-- ------- end main section ------- -->                	                	
+		 <tr><td height="25"></td></tr>					
+		 <!-- ------- section  ------- -->
+		 
+		 <tr>
+			<td>
+				<table border="0" width="560" align="center" cellpadding="0" cellspacing="0" class="container-middle">               			
+					<tr bgcolor="43637c"><td colspan="10" height="5"></td></tr>	
+					<tr bgcolor="43637c">
+						<td>
+		    				<table border="0" width="550" align="center" class="container-middle" cellpadding="0" cellspacing="0">
+								<tr bgcolor="43637c" style="color:#fff;font-size:12px;font-weight:normal importat!;font-family:Helvetica,Arial,sans-serif;">
+									<th width="70" align="left" style="font-weight:normal;">Date de<br/> publication</th>
+									<th width="70" align="left" style="font-weight:normal;">Date de<br/> décision</th>
+									<th width="130" align="left" style="font-weight:normal;">Catégorie</th>
+									<th width="75" align="left" style="font-weight:normal;">Référence</th>
+									<th width="90" align="left" style="font-weight:normal;">Mots clés</th>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr bgcolor="43637c"><td height="5"></td></tr>									
+					<tr bgcolor="ffffff"><td height="10"></td></tr>	
+					
+					<?php  
+					
+						foreach($list as $id => $words)
+						{ 					
+							$one = $this->getArret($id);
+						
+					?>
+					
+						<tr bgcolor="ffffff">
+							<td>
+			    				<table border="0" width="550" align="center" class="container-middle" cellpadding="0" cellspacing="0">
+									<tr style="color: #0f4060; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;" bgcolor="ffffff">
+			        					<td width="70" align="left"><?php  echo $one->datep_nouveaute; ?></td>
+			        					<td width="70" align="left"><?php  echo $one->dated_nouveaute; ?></td>
+			        					<td width="130" align="left"><?php echo $one->nameCat; ?></td>
+			        					<td width="75" align="left">
+			        					   <a style="color:#0f4060;font-weight:bold;" target="_blank" href="<?php echo $home;?>/?page_id=<?php echo $pageRoot; ?>&arret=<?php echo $one->numero_nouveaute;?>">
+			        						  <?php echo $one->numero_nouveaute; ?>
+			        					   </a>
+			        					</td>
+			        					<td width="90" align="left"><?php if(!empty($words)){ echo $words; } ?></td>
+									</tr>
+								</table>
+							</td>	
+						</tr>
+						<tr bgcolor="ffffff"><td colspan="6" height="10"></td></tr>	
+					
+					<?php } ?>	
+					
+    			</table>
+    		</td>
+    	 </tr>
+    	 <!--------- end section --------->
+    				
+		 <?php 
+				 
+		 /* ============================= END LOOP  ============================*/
 		 
 		 include( plugin_dir_path( dirname(dirname( __FILE__ ) ) ).'/public/views/footer-alertes.php');
 		 

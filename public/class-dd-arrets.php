@@ -53,13 +53,9 @@ class DD_Arrets {
 	 * Custom classes
 	*/
 	
-	protected $arrange;
-	
 	protected $dates;
 	
 	protected $grab;
-	
-	protected $database;
 	
 	protected $insert;
 	
@@ -68,10 +64,8 @@ class DD_Arrets {
 	protected $nouveautes;
 	
 	protected $user;
-		
-	protected $search;
-	
-	protected $utils;
+
+	protected $sendalert;
 	
 	protected $log;
 
@@ -104,13 +98,9 @@ class DD_Arrets {
 		// Mode live or test
 		$mode = get_option('dd_arrets_mode'); 
 		
-		$this->arrange    = new Arrange();
-		
 		$this->dates      = new Dates($mode);
 		
 		$this->grab       = new Grab();
-		
-		$this->database   = new Database($mode);
 		
 		$this->insert     = new Insert($mode);	
 
@@ -118,11 +108,9 @@ class DD_Arrets {
 
 		$this->nouveautes = new Nouveautes($mode);	
 
-		$this->user       = new User($mode);	
+		$this->user       = new User($mode);
 		
-		$this->search     = new Search($mode);	
-
-		$this->utils      = new Utils();
+		//$this->sendalert  = new Sendalert();	
 						
 		$this->log        = new Log();
 
@@ -374,6 +362,56 @@ class DD_Arrets {
 	 */	
 	public function send_alertes(){
 
+		/*
+		// What day is it
+		$currentday = date("N");
+
+		// Get date to update
+		// See if it's today and not in the database already
+		// Should see if everything is updated to...
+		$last = $this->grab->getLastDates($urlRoot);
+		$date = $this->dates->lastDateToInsert($last);
+		
+		$abos = $this->sendalert->prepareAlert($date,$currentday);
+		*/
+		
+		/*
+		 * Get html alert for each abos
+		*/
+		/*
+		if(!empty($abos))
+		{			
+			foreach($abos as $user => $arrets)
+			{				
+				$body_html = $this->html->setAlerteHtml($user,$arrets);	
+				
+				$result    = $this->sendalert->prepareSend($user , $body_html);
+				
+				$alerte_id = $this->sendalert->testIdSend($result);
+		
+				if($alerte_id)
+				{
+					// Alerte is send!  Update database with infos
+					$this->updateNewsletterIsSend($alerte_id,$email);
+
+				}
+			}			
+		}	
+		*/
+
+	}
+		
+	/*
+	 * Insert log alert send to email 
+	*/
+	public function updateNewsletterIsSend($alerte_id,$email){
+		
+		global $wpdb;
+		
+		$table_name = $wpdb->prefix . 'dd_alertes';
+
+	    $wpdb->insert($table_name, array('alerte_id' => $alerte_id,  'send' => date('Y-m-d') , 'email' => $email ));
+		
 	}
 
 }

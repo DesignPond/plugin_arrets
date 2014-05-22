@@ -28,6 +28,10 @@
  //Fetch, prepare, sort, and filter our data...
  $testListTable->prepare_items();
  
+ $root = 'http://relevancy.bger.ch';
+		
+ $url  = 'http://relevancy.bger.ch/php/aza/http/index.php?lang=fr&zoom=&type=show_document&highlight_docid=aza%3A%2F%2F';
+ 
  $urlArret = ( get_option('dd_newsletter_url_arret') ? get_option('dd_newsletter_url_arret') : $url ); 
 		
  $urlRoot  = ( get_option('dd_newsletter_url') ? get_option('dd_newsletter_url') : $root ); 
@@ -42,6 +46,7 @@
 	
 	<?php 
 	
+/*
 		// $testListTable->display(); 
 		$week_list = array();
 		$day_list  = array();
@@ -57,7 +62,7 @@
 		$date = $dd_dates->lastDateToInsert($last);
 		
 		// Get arrets for day
-		$day_arrets = $dd_nouveautes->getArretsAndCategoriesForDates('2014-05-07');
+		$day_arrets = $dd_nouveautes->getArretsAndCategoriesForDates('2014-04-22');
 		
 		// Get users for day
 		$day_users  = $dd_user->getUserAbos('all');
@@ -95,13 +100,15 @@
 		
 		if(!empty($everything)){
 			
-			foreach($everything as $user => $arrets){
-				
-				echo $dd_html->setAlerteHtml($user,$arrets);
-				
-			}
-			
+			foreach($everything as $user => $arrets)
+			{				
+				echo $dd_html->setAlerteHtml($user,$arrets);	
+
+			}			
 		}
+*/
+		
+
 
 
 	?>

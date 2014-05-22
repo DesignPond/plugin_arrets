@@ -1,5 +1,9 @@
-        
-                <!-- -------- footer  ------- -->
+					    	               	
+			    	 <tr><td height="25"></td></tr>                	
+			    </table>               
+			    <!------------ end main Content ----------------->  
+			       
+				<!-- -------- footer  ------- -->
                 
                 <table border="0" width="600" cellpadding="0" cellspacing="0" class="container" align="center">
                 	<tr bgcolor="43637c"><td height="10"></td></tr>

@@ -1,23 +1,3 @@
-<?php
-	
-	// require wordpress bootstrap
-	require_once( $_SERVER["DOCUMENT_ROOT"].'/wp-load.php' );
-	
-	// assets url for images and links
-	$url   = plugins_url().'/dd_newsletter/assets/';	
-	$home  = home_url();
-		
-	$mode  = get_option('dd_arrets_mode'); 
-	// database functions
-	$database = new DD_Database($mode);	
-	
-	// weeke day range for query last week's arrets
-	$dates  = $database->getWeekDays();
-	
-	// Get arrets
-	$arrets = $database->getArretsAndCategoriesForDates($dates);
-?>
-
 <!DOCTYPE HTML>
 <html>
 <head>

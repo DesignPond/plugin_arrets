@@ -97,6 +97,26 @@ class DD_Arrets_Admin {
 		$this->nouveautes = new Nouveautes($mode);	
 
 	}
+		
+	public static function dd_create_plugin_tables(){
+	
+		global $wpdb;
+		
+		$table_name = $wpdb->prefix . 'dd_alertes';
+
+	    $sql = "CREATE TABLE $table_name (
+	      id int(11) NOT NULL AUTO_INCREMENT,
+	      alerte_id varchar(255) DEFAULT NULL,
+	      send DATE,
+	      user int(11),
+	      UNIQUE KEY id (id)
+	    );";
+	
+	    require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+	    
+	    dbDelta( $sql );
+    
+	}
 
 	/**
 	 * Return an instance of this class.
