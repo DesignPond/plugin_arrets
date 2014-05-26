@@ -75,6 +75,7 @@ class DD_Arrets_Admin {
 		// Add the options page and menu item.
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 		add_action( 'admin_menu', array( $this, 'add_plugin_arrets_page' ) );
+		add_action( 'admin_menu', array( $this, 'add_plugin_alertes_page' ) );		
 				
 		// Settings for plugin
 		add_action( 'admin_init', array( $this, 'register_dd_arrets_settings' ) );
@@ -215,6 +216,19 @@ class DD_Arrets_Admin {
 		);
 		
 	}
+
+	public function add_plugin_alertes_page(){
+		
+		$this->plugin_screen_hook_suffix = add_submenu_page(
+			$this->plugin_slug,
+			__( 'Liste des alertes', $this->plugin_slug ),
+			__( 'Liste des alertes', $this->plugin_slug ),
+			'manage_options', 
+			$this->plugin_slug.'-alertes',
+			array( $this, 'display_plugin_alertes_page' )
+		);
+		
+	}	
 	
 	public function register_dd_arrets_settings(){
 	    //register our settings
@@ -252,7 +266,16 @@ class DD_Arrets_Admin {
 	public function display_plugin_admin_page() {
 		include_once( 'views/admin.php' );
 	}
-
+	
+	/**
+	 * Render the list of arrets page for this plugin.
+	 *
+	 * @since    1.0.0
+	 */
+	public function display_plugin_alertes_page() {
+		include_once( 'views/alertes.php' );
+	}
+	
 	/**
 	 * Add settings action link to the plugins page.
 	 *

@@ -72,6 +72,10 @@ class Update{
 		// Get arrets and dates to update
 		$arrets = $this->getArretsToUpdate();
 		
+		// LOGGING
+		$this->log->write('Arrets to update yes!');
+		// END LOGGIN
+		
 		if(!empty($arrets))
 		{
 			foreach($arrets as $date => $update)
@@ -80,24 +84,25 @@ class Update{
 				if( $this->updateTextArret($update) )
 				{					
 					// Pass date to updated					
-					return $this->dateIsUpdated($date);				
+					$this->dateIsUpdated($date);										 				
 				}
 				else
 				{
-					return 2;
-										
-					 // LOGGING
+					// LOGGING
 					$this->log->write('Problème with update of arret for date : '.$date);
 				 	// END LOGGIN	
+				 	
+					return 2;									
 				}
 			}
 		}
 		else
 		{
-			return 3;
 			// LOGGING
 			$this->log->write('Nothing to update : '.$date);
-			// END LOGGIN	
+			// END LOGGIN
+			
+			return 3;	
 		}
 			
 	}
@@ -111,10 +116,10 @@ class Update{
 		
 		if( $wpdb->insert( $this->updated_table , $data , array( '%s') ) === FALSE )
 		{	
-			return false;
+			return 0;
 		}
 				
-		return true;  
+		return 1;  
 
 	}
 	
