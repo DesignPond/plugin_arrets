@@ -77,7 +77,7 @@ class Html{
 								<tr bgcolor="ffffff"><td height="14"></td></tr>	 
 								<tr style="color:#43637c;font-size:13px;font-weight:bold importat!;font-family:Helvetica,Arial,sans-serif;">
 									<td style="color:#43637c;font-size:13px;font-weight:bold importat!;font-family:Helvetica,Arial,sans-serif;" align="left">
-										Bonjour <?php echo $first_name; ?> <?php echo $last_name; ?>,
+										Bonjour <strong><?php echo $first_name; ?> <?php echo $last_name; ?></strong>,
 										Voici les derniers arrêts correspondant à vos abonnements 
 									</td> 
 								</tr>	

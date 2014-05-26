@@ -13,6 +13,7 @@
  
  $dd_nouveautes = new Nouveautes($mode);
  $dd_utils      = new Utils();
+ $dd_sendalert  = new Sendalert();
  
  $list = $dd_nouveautes->nouveautesQuery(15);
  
@@ -35,7 +36,26 @@
 	
 	<?php 
 	
-		$testListTable->display(); 
+		// $testListTable->display(); 
+		
+		// Params
+		$fromName  = 'Droit pour le Praticien';
+		$from      = 'info@droitpourlepraticien.ch';
+		$to        =  'cindy.leschaud@gmail.com';
+		$subject   = 'Test | Droit pour le Praticien';
+		$body_text =  NULL;
+		$body_html = '<p>test</p>';
+		
+		$send = $dd_sendalert->sendElasticEmail($to, $subject, $body_text, $body_html, $from, $fromName);
+		
+		function strip_header($data)
+		{
+			return substr($data, strpos($data,"\r\n\r\n")+4);
+		}
+		
+		$data = strip_header($send);
+		
+		print_r($data);
 
 	?>
 	

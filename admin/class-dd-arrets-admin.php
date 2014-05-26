@@ -75,16 +75,20 @@ class DD_Arrets_Admin {
 		// Add the options page and menu item.
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 		add_action( 'admin_menu', array( $this, 'add_plugin_arrets_page' ) );
-		add_action( 'admin_menu', array( $this, 'add_plugin_alertes_page' ) );		
+		add_action( 'admin_menu', array( $this, 'add_plugin_alertes_page' ) );
+		add_action( 'admin_menu', array( $this, 'add_plugin_users_page' ) );		
 				
-		// Settings for plugin
+		// Settings for database, use test tables
 		add_action( 'admin_init', array( $this, 'register_dd_arrets_settings' ) );
+		// Day to send alertes
+		add_action( 'admin_init', array( $this, 'register_day_alertes' ) );
 		
-		add_action( 'admin_init', array( $this, 'register_url_list' ) );	
-		
-		add_action( 'admin_init', array( $this, 'register_url_arret' ) );
-		
+		// url to list of dates
+		add_action( 'admin_init', array( $this, 'register_url_list' ) );
+		// url to one date
 		add_action( 'admin_init', array( $this, 'register_url' ) );			
+		// url to one arret
+		add_action( 'admin_init', array( $this, 'register_url_arret' ) );	
 
 		// Add an action link pointing to the options page.
 		$plugin_basename = plugin_basename( plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . $this->plugin_slug . '.php' );
@@ -221,18 +225,34 @@ class DD_Arrets_Admin {
 		
 		$this->plugin_screen_hook_suffix = add_submenu_page(
 			$this->plugin_slug,
-			__( 'Liste des alertes', $this->plugin_slug ),
-			__( 'Liste des alertes', $this->plugin_slug ),
+			__( 'Email alertes', $this->plugin_slug ),
+			__( 'Email alertes', $this->plugin_slug ),
 			'manage_options', 
 			$this->plugin_slug.'-alertes',
 			array( $this, 'display_plugin_alertes_page' )
 		);
 		
 	}	
-	
+
+	public function add_plugin_users_page(){
+		
+		$this->plugin_screen_hook_suffix = add_submenu_page(
+			$this->plugin_slug,
+			__( 'Abos des utilisateurs', $this->plugin_slug ),
+			__( 'Abos des utilisateurs', $this->plugin_slug ),
+			'manage_options', 
+			$this->plugin_slug.'-users',
+			array( $this, 'display_plugin_users_page' )
+		);
+		
+	}	
+		
 	public function register_dd_arrets_settings(){
-	    //register our settings
 	    register_setting( 'dd-arrets-settings-group', 'dd_arrets_mode' );	
+	}
+	
+	public function register_day_alertes(){
+	    register_setting( 'dd-arrets-day-alertes', 'dd_day_alertes' );	
 	}
 	
 	public function register_url_list(){
@@ -268,12 +288,21 @@ class DD_Arrets_Admin {
 	}
 	
 	/**
-	 * Render the list of arrets page for this plugin.
+	 * Render the list of alertes to send
 	 *
 	 * @since    1.0.0
 	 */
 	public function display_plugin_alertes_page() {
 		include_once( 'views/alertes.php' );
+	}
+
+	/**
+	 * Render the list of users with abos
+	 *
+	 * @since    1.0.0
+	 */	
+	public function display_plugin_users_page(){
+		include_once( 'views/users.php' );
 	}
 	
 	/**

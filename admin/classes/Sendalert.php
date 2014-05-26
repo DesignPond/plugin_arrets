@@ -54,6 +54,10 @@ class Sendalert{
 		$day_list   = array();
 		$everything = array();
 		
+		// Get day to send
+	    $current   = get_option('dd_day_alertes'); 	    	
+	    $activeday = ($current ? $current : 5);
+		
 		// Get arrets for day
 		$day_arrets = $this->nouveautes->getArretsAndCategoriesForDates($date);
 		
@@ -70,7 +74,7 @@ class Sendalert{
 		}
 				
 		// If it's friday friday! we need all week date range to
-		if($currentday == 5)
+		if($currentday == $activeday)
 		{
 			// Get 5 last week days
 			$week_days   = $this->nouveautes->getWeekDays();		
@@ -167,26 +171,7 @@ class Sendalert{
 		
 	public function testIdSend($string)
 	{
-		$string  = trim($string);
-		$string  = str_replace("\r", " ", $string);
-		$string  = str_replace("\n", " ", $string);
-
-		$explode = explode(' ', $string);		
-		$explode = array_filter($explode);			
-		$end     = end($explode);
-		
-		$end     = preg_replace('/ {2,}/',' ',$end);
-		$end     = trim($end);
-					
-		$matches = null;
-		
-		$returnValue = preg_match('/^[a-z0-9-]{3,40}/', $end , $matches);
-		
-		if($matches) { return $end; }
-		
-		return false;
-		
+		return substr($data, strpos($data,"\r\n\r\n")+4);		
 	}
-	
-		
+			
 }

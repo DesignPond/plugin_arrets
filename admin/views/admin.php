@@ -75,7 +75,47 @@
 
 	</form>
 	<br/>
-		
+
+
+	<h3>Jour d'envoi</h3>	
+	
+	<form method="post" action="options.php">
+	
+	    <?php settings_fields( 'dd-arrets-day-alertes' ); ?>
+	    <?php do_settings_sections( 'dd-arrets-day-alertes' ); ?>
+	    
+	    <?php 
+	    
+	    	$current    = get_option('dd_day_alertes'); 
+	    	
+	    	$currentday = ($current ? $current : 5);
+	    	
+	    	$days = array( 1 => 'Lundi' , 2 => 'Mardi' , 3 => 'Mercredi' , 4 => 'Jeudi' , 5 => 'Vendredi');
+	    ?>
+	    
+	    <table class="form-table">
+	        <tr valign="top">
+	        <th scope="row">Jour </th>
+	        <td class="dd_width_big">
+	        	<select name="dd_day_alertes">
+		        	<?php
+		        		
+		        		foreach($days as $id => $day)
+		        		{
+		        			$select = ($id == $currentday ? ' selected ': '');
+			        		echo '<option '.$select.' value="'.$id.'">'.$day.'</option>';
+		        		}
+		        	
+		        	?>
+	        	</select>
+	        </td>
+		    <td><input type="submit" value="Enregistrer" class="button button-primary" id="submit" name="submit"></td>
+	        </tr>
+	    </table>
+
+	</form>
+	<br/>
+			
 	<h3>Url principale du TF</h3>	
 	
 	<form method="post" action="options.php">

@@ -16,3 +16,68 @@
 	.dd_width_small input{
 		width: 200px;
 	}
+	
+.dd_bloc_float{
+	display: block;
+	float: left;
+}
+
+.dd_bloc_small{
+	width: 380px;
+}
+
+.dd_bloc_big{
+	width: 620px;
+}
+
+.dd_clear{
+	clear: both;
+	visibility: hidden;
+	content: ".";
+	padding: 0;
+	margin: 0;
+}
+	
+.dd_alertes_form{
+	width: 320px;
+	display: block;
+	background: #dddddd;
+	padding: 10px;
+}
+
+.form-table.dd_table_alertes{
+	width: 360px;
+}
+
+.form-table.dd_table_alertes th,.form-table.dd_table_alertes td{
+	padding: 5px;
+	margin: 0;
+	line-height: 18px;
+	vertical-align: top;
+}
+
+.dd_table_header th{
+	background:#222222;
+	color: #fff;
+}
+
+.form-table.dd_users{
+	margin-bottom: 20px;
+}
+
+.form-table.dd_users th,.form-table.dd_users td, .form-table.dd_users td p{
+	font-size: 12px;
+	padding: 2px 5px;
+	width: 250px;
+	vertical-align: top;
+	margin-top: 0;
+	border: 1px solid #d0d0d0;
+}
+
+.form-table.dd_users tr.dd_table_user_header th{
+	text-align: center;
+	padding: 5px 5px;
+	font-weight: normal;
+	background: #bccfdb;
+	font-size: 14px;
+}

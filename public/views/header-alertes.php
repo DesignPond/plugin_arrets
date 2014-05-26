@@ -91,7 +91,7 @@
 <body yahoo="fix" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 
 	<table border="0" width="100%" cellpadding="0" cellspacing="0">	
-		<tr><td height="30"></td></tr>		
+		<tr><td height="10"></td></tr>		
         <tr>       	
             <td width="100%" align="center" valign="top" bgcolor="#ffffff">
             	
