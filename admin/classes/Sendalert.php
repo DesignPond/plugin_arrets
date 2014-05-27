@@ -12,9 +12,9 @@ class Sendalert{
 	
 	protected $user;
 	
+	protected $update;
+		
 	protected $html;
-
-	protected $sendalert;
 	
 	protected $log;
 	
@@ -32,6 +32,8 @@ class Sendalert{
 		$this->grab       = new Grab();
 
 		$this->nouveautes = new Nouveautes($mode);	
+
+		$this->update     = new Update($mode);	
 
 		$this->user       = new User($mode);
 
@@ -118,6 +120,35 @@ class Sendalert{
 		
 		return $result;
 		
+	}
+	
+	public function updateOk(){
+	
+		$arrets = $this->update->getArretsToUpdate();
+		
+		if(!empty($arrets))
+		{	
+			wp_mail('cindy.leschaud@gmail.com', 'Alertes', 'We have to update first');
+					
+			$result = $this->update->initUpdate();
+			
+			switch ($result) {
+			    case TRUE:
+			        return TRUE;
+			        break;
+			    case FALSE:
+			    	 return FALSE;
+			        break;	
+			    case 2:
+			    	return FALSE;
+			        break;	
+			    case 3:
+			        return FALSE;
+			        break;				    			      
+			}				
+		}
+		
+		return TRUE;
 	}
 	
 	/*

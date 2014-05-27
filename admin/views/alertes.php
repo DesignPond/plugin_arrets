@@ -75,20 +75,20 @@
 		
 		<?php 
 		
-		// all users 		
-		$everything = $dd_sendalert->prepareAlert($date,$currentday);
-		
-		echo '<div class="dd_bloc_float dd_bloc_big">';
-		
-			if(!empty($everything)){
-				
-				foreach($everything as $user => $arrets)
-				{				
-					echo $dd_html->setAlerteHtml($user,$arrets);	
-				}			
-			}
-		
-		echo '</div>';
+			// all users 		
+			$everything = $dd_sendalert->prepareAlert($date,$currentday);
+			
+			echo '<div class="dd_bloc_float dd_bloc_big">';
+			
+				if(!empty($everything)){
+					
+					foreach($everything as $user => $arrets)
+					{				
+						echo $dd_html->setAlerteHtml($user,$arrets);	
+					}			
+				}
+			
+			echo '</div>';
 
 		?>
 	

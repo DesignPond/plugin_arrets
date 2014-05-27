@@ -76,7 +76,8 @@ class DD_Arrets_Admin {
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 		add_action( 'admin_menu', array( $this, 'add_plugin_arrets_page' ) );
 		add_action( 'admin_menu', array( $this, 'add_plugin_alertes_page' ) );
-		add_action( 'admin_menu', array( $this, 'add_plugin_users_page' ) );		
+		add_action( 'admin_menu', array( $this, 'add_plugin_users_page' ) );
+		add_action( 'admin_menu', array( $this, 'add_plugin_sent_page' ) );		
 				
 		// Settings for database, use test tables
 		add_action( 'admin_init', array( $this, 'register_dd_arrets_settings' ) );
@@ -246,6 +247,18 @@ class DD_Arrets_Admin {
 		);
 		
 	}	
+	
+	public function add_plugin_sent_page(){
+	
+		$this->plugin_screen_hook_suffix = add_submenu_page(
+			$this->plugin_slug,
+			__( 'Alertes envoyés', $this->plugin_slug ),
+			__( 'Alertes envoyés', $this->plugin_slug ),
+			'manage_options', 
+			$this->plugin_slug.'-sent',
+			array( $this, 'display_plugin_sent_page' )
+		);
+	}
 		
 	public function register_dd_arrets_settings(){
 	    register_setting( 'dd-arrets-settings-group', 'dd_arrets_mode' );	
@@ -303,6 +316,15 @@ class DD_Arrets_Admin {
 	 */	
 	public function display_plugin_users_page(){
 		include_once( 'views/users.php' );
+	}
+
+	/**
+	 * Render the list of alertes send to users
+	 *
+	 * @since    1.0.0
+	 */		
+	public function display_plugin_sent_page(){
+		include_once( 'views/sent.php' );
 	}
 	
 	/**

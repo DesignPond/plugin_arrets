@@ -98,10 +98,6 @@ class Database{
 				 				 
 				 $inserted[$id] = $newarret;
 				 
-				 // LOGGING
-				 $this->log->write('New arret inserted : '.$id);
-				 // END LOGGIN
-				 
 				 // Insert DB subcategory
 				 if($id)
 				 {

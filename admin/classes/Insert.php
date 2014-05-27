@@ -67,11 +67,7 @@ class Insert{
 				return false;
 			}		
 						
-			return true;
-			
-			// LOGGING
-			$this->log->write('All arret inserted for date '.$date.'');
-		 	// END LOGGIN				
+			return true;			
 		}	
 		
 		return false;	

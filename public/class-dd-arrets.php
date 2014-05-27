@@ -377,9 +377,15 @@ class DD_Arrets {
 
 		// Get date to update
 		// See if it's today and not in the database already
-		// Should see if everything is updated to... and if it's not sent already
 		$last = $this->grab->getLastDates($this->urlList);
 		$date = $this->dates->lastDateToSend($last);
+		
+		// Should see if everything is updated ... 
+		if( !$this->sendalert->updateOk() )
+		{
+			wp_mail('cindy.leschaud@gmail.com', 'Alertes', 'Arrêts pas updated!');
+		}
+		// And if it's not sent already
 		
 		$abos = $this->sendalert->prepareAlert($date,$currentday);
 		
