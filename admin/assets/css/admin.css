@@ -49,11 +49,26 @@
 	width: 360px;
 }
 
-.form-table.dd_table_alertes th,.form-table.dd_table_alertes td{
+.form-table.dd_table_alertes th,
+.form-table.dd_table_alertes td,
+.form-table.dd_table_sent td,
+.form-table.dd_table_sent th
+{
 	padding: 5px;
 	margin: 0;
 	line-height: 18px;
 	vertical-align: top;
+}
+
+.form-table.dd_table_sent td
+{
+	padding: 3px 5px 10px;
+}
+
+.form-table.dd_table_sent th
+{
+	padding: 5px;
+	width: 150px;
 }
 
 .dd_table_header th{

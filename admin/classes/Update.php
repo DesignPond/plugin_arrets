@@ -84,7 +84,10 @@ class Update{
 				if( $this->updateTextArret($update) )
 				{					
 					// Pass date to updated					
-					$this->dateIsUpdated($date);										 				
+					if( !$this->dateIsUpdated($date) )
+					{
+						return 0;
+					}										 				
 				}
 				else
 				{
@@ -95,6 +98,8 @@ class Update{
 					return 2;									
 				}
 			}
+			
+			return 1;
 		}
 		else
 		{

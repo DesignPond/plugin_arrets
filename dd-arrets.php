@@ -51,6 +51,24 @@ require_once( plugin_dir_path( __FILE__ ) . 'bootstrap.php' );
 register_activation_hook( __FILE__, array( 'DD_Arrets', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'DD_Arrets', 'deactivate' ) );
 
+/**
+ * Cron jobs
+*/
+
+// Add cron job for update arrêts
+register_activation_hook( __FILE__  , 'add_arrets_schedule' );
+register_deactivation_hook( __FILE__, 'clear_arrets_schedule');
+
+// Hook crons
+function add_arrets_schedule()
+{
+	wp_schedule_event( time(), 'daily', 'dd_daily_arrets' );
+}
+
+function clear_arrets_schedule()
+{
+	wp_clear_scheduled_hook('dd_daily_arrets');
+}
 
 // Add cron job for sending alertes
 register_activation_hook( __FILE__  , 'add_alerte_schedule' );
@@ -59,7 +77,7 @@ register_deactivation_hook( __FILE__, 'clear_alerte_schedule');
 // Hook crons
 function add_alerte_schedule()
 {
-	wp_schedule_event( time(), 'daily', 'dd_daily_alert' );
+	wp_schedule_event( time() + 120 , 'daily', 'dd_daily_alert' );
 }
 
 function clear_alerte_schedule()

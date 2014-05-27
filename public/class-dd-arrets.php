@@ -93,6 +93,7 @@ class DD_Arrets {
 		
 		// Cron job		
 		add_action( 'dd_daily_alert', array( $this, 'send_alertes' ) );
+		add_action( 'dd_daily_arrets', array( $this, 'update_arrets' ) );
 		
 		// post from admin function
 		add_action( 'admin_post_insert-date', array( $this, 'insert_date' ) );
@@ -364,6 +365,29 @@ class DD_Arrets {
 		exit; 
  	
 	}
+	
+	/**
+	 * Cron job fire , update arrets for day
+	 * Test the day
+	 */		
+	public function update_arrets(){
+		
+		if( $this->insert->insertMissingDates() )
+		{
+			$this->update->initUpdate();
+		}
+		
+		// Should see if everything is updated ... 
+		if( $this->sendalert->updateOk() )
+		{
+			wp_mail('cindy.leschaud@gmail.com', 'Alertes', 'Arrêts mis en ligne '.time() );
+		}
+		else
+		{
+			wp_mail('cindy.leschaud@gmail.com', 'Alertes', 'Problème avec la mise à jour des arrêts');
+		}
+		
+	}
 
 	/**
 	 * Cron job fire , sending all alertes
@@ -417,7 +441,7 @@ class DD_Arrets {
 			}			
 		}	
 		
-		wp_mail('cindy.leschaud@gmail.com', 'Résultat', 'Fin envoi alertes ');
+		wp_mail('cindy.leschaud@gmail.com', 'Résultat', 'Fin envoi alertes '.time() );
 	
 	}
 			

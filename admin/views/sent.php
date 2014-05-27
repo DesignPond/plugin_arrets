@@ -21,26 +21,21 @@
 		
 	<?php 
 		
-		$alertes = $dd_alertes->getAlertesSent();
-		
-		$alertes = $dd_alertes->filterByDay($alertes);
-		
-		echo '<pre>';
-		print_r($alertes);
-		echo '</pre>';
-			
+		$alertes = $dd_alertes->getAlertesSent();	
+		$alertes = $dd_alertes->filterByDay($alertes);	
 							
-		echo '<table class="form-table">';
+		echo '<table class="form-table dd_table_sent">';
 						
 		if( !empty($alertes) )
 		{
+			
 		    foreach($alertes as $date => $alerteInfo)
 		    {
 		   		echo '<tr>';
 		   		
 			   		echo '<th>'.$date.'</th>';
 			   		echo '<td>';
-			   		echo '<table border="0" cellpadding="0"  cellspacing="0">';
+			   		echo '<table border="0" width="80%" cellpadding="0" cellspacing="0">';
 			   		
 				    foreach($alerteInfo as $alerte)
 				    {	
@@ -54,6 +49,7 @@
 						$rythme_abo = get_user_meta($user, 'rythme_abo', true); 
 			
 						echo '<tr>';
+							echo '<td>'.$user_id.'</td>';
 							echo '<td>'.$first_name.' '.$last_name.'</td>';
 							echo '<td>'.$alerte->alerte_id.'</td>';
 							echo '<td>'.$alerte->user_email.'</td>';
