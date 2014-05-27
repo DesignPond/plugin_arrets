@@ -58,14 +58,14 @@
 
 	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 
-	<h3>Mode</h3>	
+	<h3>Configuration</h3>
 	
 	<form method="post" action="options.php">
 	
 	    <?php settings_fields( 'dd-arrets-settings-group' ); ?>
 	    <?php do_settings_sections( 'dd-arrets-settings-group' ); ?>
 	    
-	    <table class="form-table">
+	    <table class="form-table dd_minified_table">
 	        <tr valign="top">
 	        <th scope="row">Mode (test ou null/rien)</th>
 	        <td class="dd_width_big"><input type="text" name="dd_arrets_mode" value="<?php echo get_option('dd_arrets_mode'); ?>" /></td>
@@ -75,10 +75,7 @@
 
 	</form>
 	<br/>
-
-
-	<h3>Jour d'envoi</h3>	
-	
+		
 	<form method="post" action="options.php">
 	
 	    <?php settings_fields( 'dd-arrets-day-alertes' ); ?>
@@ -93,7 +90,7 @@
 	    	$days = array( 1 => 'Lundi' , 2 => 'Mardi' , 3 => 'Mercredi' , 4 => 'Jeudi' , 5 => 'Vendredi');
 	    ?>
 	    
-	    <table class="form-table">
+	    <table class="form-table dd_minified_table">
 	        <tr valign="top">
 	        <th scope="row">Jour </th>
 	        <td class="dd_width_big">
@@ -115,17 +112,17 @@
 
 	</form>
 	<br/>
-			
-	<h3>Url principale du TF</h3>	
+
+	<h3>Urls</h3>
 	
 	<form method="post" action="options.php">
 	
 	    <?php settings_fields( 'dd-newsletter-url' ); ?>
 	    <?php do_settings_sections( 'dd-newsletter-url' ); ?>
 	    
-	    <table class="form-table">
+	    <table class="form-table dd_minified_table">
 	        <tr valign="top">
-	        <th scope="row">Url</th>
+	        <th scope="row">Url principale du TF</th>
 	        <td class="dd_width_big"><input type="text" name="dd_newsletter_url" value="<?php echo get_option('dd_newsletter_url'); ?>" /></td>
 	        <td><input type="submit" value="Enregistrer" class="button button-primary" id="submit" name="submit"></td>
 	        </tr>
@@ -133,17 +130,15 @@
 	
 	</form>
 	<br/>
-	
-	<h3>Url liste des dates de publication</h3>	
-	
+
 	<form method="post" action="options.php">
 	
 	    <?php settings_fields( 'dd-arrets-url-list' ); ?>
 	    <?php do_settings_sections( 'dd-arrets-url-list' ); ?>
 	    
-	    <table class="form-table">
+	    <table class="form-table dd_minified_table">
 	        <tr valign="top">
-	        <th scope="row">Url</th>
+	        <th scope="row">Url liste des dates de publication</th>
 	        <td class="dd_width_big"><input type="text" name="dd_arrets_url_list" value="<?php echo get_option('dd_arrets_url_list'); ?>" /></td>
 	        <td><input type="submit" value="Enregistrer" class="button button-primary" id="submit" name="submit"></td>
 	        </tr>
@@ -151,17 +146,15 @@
 
 	</form>
 	<br/>
-			
-	<h3>Url des arrêt</h3>	
-	
+
 	<form method="post" action="options.php">
 	
 	    <?php settings_fields( 'dd-newsletter-url-arret' ); ?>
 	    <?php do_settings_sections( 'dd-newsletter-url-arret' ); ?>
 	    
-	    <table class="form-table">
+	    <table class="form-table dd_minified_table">
 	        <tr valign="top">
-	        <th scope="row">Url</th>
+	        <th scope="row">Url des arrêt</th>
 	        <td class="dd_width_big"><input type="text" name="dd_newsletter_url_arret" value="<?php echo get_option('dd_newsletter_url_arret'); ?>" /></td>
 	        <td><input type="submit" value="Enregistrer" class="button button-primary" id="submit" name="submit"></td>
 	        </tr>
@@ -172,20 +165,18 @@
 	<h3>Date dernière mise à jour</h3>
 	<p><strong><?php echo $dd_dates->lastDayInDb(); ?></strong></p>
 	<br/>
-	
-	<h3>Insérer date</h3>
-	
+
 	<form method="post" action="admin-post.php">
 	
-		<table style="width:400px" class="form-table">
+		<table class="form-table dd_minified_table">
 	        <tr valign="top">
-		        <th scope="row">Date</th>
-				<td>
+		        <th scope="row">Insérer date</th>
+				<td class="dd_width_big">
 					<input type="hidden" name="action" value="insert-date" />
 					<input type="text" id="datepicker" name="insert_date" value="" />
 					<input type="hidden" id="inser-date-format" name="inser-date-format" />
 				</td>
-				<td><input type="submit" value="Insérer" class="button button-primary" id="submit" name="submit"></td>
+				<td><input type="submit" value="Envoyer" class="button button-primary" id="submit" name="submit"></td>
 		    </tr>
 		</table>	
 	

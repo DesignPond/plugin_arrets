@@ -154,7 +154,7 @@ class Table extends WP_List_Table {
      
     function get_columns(){
         $columns = array(
-            'id_nouveaute'         => 'ID', //Render a checkbox instead of text
+            'id_nouveaute'         => 'ID', 
             'numero_nouveaute'     => 'Référence',
             'datep_nouveaute'      => 'Date publication',
             'nameCat'              => 'Categorie'
@@ -252,8 +252,7 @@ class Table extends WP_List_Table {
          */
          
         $per_page = 15;
-        
-        
+                
         /**
          * REQUIRED. Now we need to define our column headers. This includes a complete
          * array of columns to be displayed (slugs & titles), a list of columns
@@ -266,7 +265,6 @@ class Table extends WP_List_Table {
         $hidden   = array();
         $sortable = $this->get_sortable_columns();
         
-        
         /**
          * REQUIRED. Finally, we build an array to be used by the class for column 
          * headers. The $this->_column_headers property takes an array which contains
@@ -275,8 +273,7 @@ class Table extends WP_List_Table {
          */
          
         $this->_column_headers = array($columns, $hidden, $sortable);
-        
-        
+                
         /**
          * Optional. You can handle your bulk actions however you see fit. In this
          * case, we'll handle them within our package just to keep things clean.

@@ -171,7 +171,7 @@ class Sendalert{
 		
 	public function testIdSend($string)
 	{
-		return substr($data, strpos($data,"\r\n\r\n")+4);		
+		return substr($string, strpos($string,"\r\n\r\n")+4);		
 	}
 			
 }

@@ -199,8 +199,8 @@ class DD_Arrets_Admin {
 		 *        Administration Menus: http://codex.wordpress.org/Administration_Menus
 		 */
 		$this->plugin_screen_hook_suffix = add_menu_page(
-			__( 'Nouveaux arrêts', $this->plugin_slug ),
-			__( 'Nouveaux arrêts', $this->plugin_slug ),
+			__( 'Arrêts Settings', $this->plugin_slug ),
+			__( 'Arrêts Settings', $this->plugin_slug ),
 			'manage_options',
 			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )

@@ -81,3 +81,26 @@
 	background: #bccfdb;
 	font-size: 14px;
 }
+
+.form-table.dd_minified_table th,.form-table.dd_minified_table td{
+	font-size: 12px;
+	padding: 2px 5px;
+	vertical-align: middle;	
+}
+
+
+.widefat tfoot tr th#id_nouveaute, .widefat thead tr th#id_nouveaute {
+    width: 100px;
+}
+
+.widefat tfoot tr th#datep_nouveaute, 
+.widefat thead tr th#datep_nouveaute,
+.widefat tfoot tr th#numero_nouveaute, 
+.widefat thead tr th#numero_nouveaute {
+    width: 200px;
+}
+
+.widefat tbody#the-list tr td{
+	font-size: 12px;
+	line-height: 18px;
+}
