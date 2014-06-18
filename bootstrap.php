@@ -11,7 +11,6 @@ else
     require_once( dirname(dirname(dirname(dirname(__FILE__)))).'/wp-load.php' );
 }
 
-
 include_once('arret_autoloader.php');
 // Register the directory to your include files
 Arret_AutoLoader::registerDirectory( $path . 'admin/classes');

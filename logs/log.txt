@@ -1,23 +1,31 @@
-New arret inserted : 650
+// logs
+// logs
+Arrets to update yes!
+// logs
+// logs
 Arrets to update yes!
 Arrets to update yes!
-Nothing to insert
+// logs
+// logs
 Arrets to update yes!
-New arret inserted : 650
-Arrets to update yes!
-Arrets to update yes!
-Nothing to insert
-Arrets to update yes!
-Nothing to insert
-New arret inserted : 650
+// logs
+// logs
 Arrets to update yes!
 Arrets to update yes!
-Nothing to insert
 Arrets to update yes!
-New arret inserted : 650
+// logs
+// logs
+Arrets to update yes!
+// logs
+// logs
 Arrets to update yes!
 Arrets to update yes!
-Nothing to insert
+// logs
+// logs
 Arrets to update yes!
-Nothing to insert
+// logs
+// logs
+Arrets to update yes!
+Arrets to update yes!
+Arrets to update yes!
 Arrets to update yes!

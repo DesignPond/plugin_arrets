@@ -45,6 +45,15 @@
 	padding: 10px;
 }
 
+
+#ui-datepicker-div{
+ font-size:13px !important;
+}
+
+#ui-datepicker-div.ui-datepicker table{
+   font-size: 1em !important;
+}
+
 .form-table.dd_table_alertes{
 	width: 360px;
 }

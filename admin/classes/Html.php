@@ -44,6 +44,9 @@ class Html{
 		 	
 		 $home       = home_url();
 		 $url        = plugins_url().'/dd_arrets/assets/';
+		 
+		 // For now...
+		 $url        = 'http://www.droitpourlepraticien.ch/newsletter/';	
 		 $pageRoot   = 1143;
 		 	 
 		 $first_name = get_user_meta($user,'first_name',true);
