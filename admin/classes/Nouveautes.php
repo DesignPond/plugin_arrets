@@ -296,7 +296,7 @@ class Nouveautes {
 					{
 						// already keywords
 						
-						$word = ( !empty($cleaned[$user_id][$id]) ? ';'.$cleaned[$user_id][$id] : '' );
+						$word = ( !empty($cleaned[$user_id][$id]) ? ' '.$cleaned[$user_id][$id] : '' );
 						
 						$cleaned[$user_id][$id] = $keyword.$word;
 					}
