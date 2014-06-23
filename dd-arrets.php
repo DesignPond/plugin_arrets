@@ -51,18 +51,25 @@ require_once( plugin_dir_path( __FILE__ ) . 'bootstrap.php' );
 register_activation_hook( __FILE__, array( 'DD_Arrets', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'DD_Arrets', 'deactivate' ) );
 
-/**
- * Cron jobs
-*/
 
-// Add cron job for update arrêts
+/*----------------------------------------------------------------------------*
+ * Schedules for cron jobs
+ *----------------------------------------------------------------------------*/
+
+/*===== Cron for ARRETS UPDATES ======*/
+
+// register when plugin is activated or deactivated
 register_activation_hook( __FILE__  , 'add_arrets_schedule' );
 register_deactivation_hook( __FILE__, 'clear_arrets_schedule');
 
 // Hook crons
 function add_arrets_schedule()
 {
-	wp_schedule_event( time(), 'daily', 'dd_daily_arrets' );
+	// Schedule an action if it's not already scheduled
+	if ( ! wp_next_scheduled( 'dd_daily_arrets' ) ) 
+	{
+		wp_schedule_event( time(), 'daily', 'dd_daily_arrets' );
+	}
 }
 
 function clear_arrets_schedule()
@@ -70,14 +77,20 @@ function clear_arrets_schedule()
 	wp_clear_scheduled_hook('dd_daily_arrets');
 }
 
-// Add cron job for sending alertes
+/*===== Cron for ALERTES ======*/
+
+// register when plugin is activated or deactivated
 register_activation_hook( __FILE__  , 'add_alerte_schedule' );
 register_deactivation_hook( __FILE__, 'clear_alerte_schedule');
 
-// Hook crons
+// Main function to register cron jobs
 function add_alerte_schedule()
 {
-	wp_schedule_event( time() + 120 , 'daily', 'dd_daily_alert' );
+	// Schedule an action if it's not already scheduled
+	if ( ! wp_next_scheduled( 'dd_daily_alert' ) ) 
+	{
+	    wp_schedule_event( time() + 300 , 'daily', 'dd_daily_alert' ); // Add 5 minutes to wait for update to finish
+	}
 }
 
 function clear_alerte_schedule()
@@ -85,11 +98,8 @@ function clear_alerte_schedule()
 	wp_clear_scheduled_hook('dd_daily_alert');
 }
 
-/*
- * @TODO:
- *
- * - replace DD_Arrets with the name of the class defined in
- *   `class-plugin-name.php`
+/**
+ * Plugin is loaded
  */
 add_action( 'plugins_loaded', array( 'DD_Arrets', 'get_instance' ) );
 

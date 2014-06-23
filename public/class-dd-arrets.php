@@ -408,6 +408,7 @@ class DD_Arrets {
 		if( !$this->sendalert->updateOk() )
 		{
 			wp_mail('cindy.leschaud@gmail.com', 'Alertes', 'Arrêts pas updated!');
+			exit();
 		}
 		// And if it's not sent already
 		
