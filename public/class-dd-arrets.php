@@ -414,7 +414,7 @@ class DD_Arrets {
 		
 		$abos = $this->sendalert->prepareAlert($date,$currentday);
 		
-		$this->goSendAlertes($abos);
+		//$this->goSendAlertes($abos);
 
 	}
 	

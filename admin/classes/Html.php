@@ -47,7 +47,7 @@ class Html{
 		 
 		 // For now...
 		 $url        = 'http://www.droitpourlepraticien.ch/newsletter/';	
-		 $pageRoot   = 1143;
+		 $pageRoot   = get_ID_by_slug('decision');
 		 	 
 		 $first_name = get_user_meta($user,'first_name',true);
 		 $last_name  = get_user_meta($user,'last_name',true);
@@ -63,7 +63,7 @@ class Html{
 		 ?>
 
 		 <!-- ------- main section ------- -->                	
-		 <tr>
+		 <tr align="center">
 			<td bgcolor="bccfdb">
 				<table border="0" width="560" align="center" cellpadding="0" cellspacing="0" class="container-middle">	                				
 					<tr bgcolor="ffffff"><td height="15"></td></tr>	                			
@@ -74,7 +74,7 @@ class Html{
 							</a>
 						</td>
 					</tr>	
-					<tr bgcolor="ffffff">
+					<tr align="center" bgcolor="ffffff">
 						<td>
 							<table border="0" width="540" align="center" class="container-middle" cellpadding="0" cellspacing="0">
 								<tr bgcolor="ffffff"><td height="14"></td></tr>	 
@@ -96,19 +96,19 @@ class Html{
 		 <tr><td height="25"></td></tr>					
 		 <!-- ------- section  ------- -->
 		 
-		 <tr>
+		 <tr align="center">
 			<td>
-				<table border="0" width="560" align="center" cellpadding="0" cellspacing="0" class="container-middle">               			
+				<table border="0" width="560" align="center" cellpadding="0" cellspacing="0" class="container-middle mainList">               			
 					<tr bgcolor="43637c"><td colspan="10" height="5"></td></tr>	
-					<tr bgcolor="43637c">
+					<tr align="center" bgcolor="43637c">
 						<td>
-		    				<table border="0" width="550" align="center" class="container-middle" cellpadding="0" cellspacing="0">
-								<tr bgcolor="43637c" style="color:#fff;font-size:12px;font-weight:normal importat!;font-family:Helvetica,Arial,sans-serif;">
-									<th width="70" align="left" style="font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#fff;font-weight:normal;">Date de<br/> publication</th>
-									<th width="70" align="left" style="font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#fff;font-weight:normal;">Date de<br/> décision</th>
-									<th width="130" align="left" style="font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#fff;font-weight:normal;">Catégorie</th>
-									<th width="75" align="left" style="font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#fff;font-weight:normal;">Référence</th>
-									<th width="90" align="left" style="font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#fff;font-weight:normal;">Mots clés</th>
+		    				<table border="0" width="550" align="center" class="container-middle mainListTable" cellpadding="0" cellspacing="0">
+								<tr class="heading" bgcolor="43637c" style="color:#ffffff !important;font-size:12px !important;font-weight:normal importat!;font-family:Helvetica,Arial,sans-serif;">
+									<th width="70" align="left" style="font-family:Helvetica,Arial,sans-serif;font-size:12px;color: rgb(255, 255, 255);font-weight:normal;">Date de<br/> publication</th>
+									<th width="70" align="left" style="font-family:Helvetica,Arial,sans-serif;font-size:12px;color: rgb(255, 255, 255);font-weight:normal;">Date de<br/> décision</th>
+									<th width="130" align="left" style="font-family:Helvetica,Arial,sans-serif;font-size:12px;color: rgb(255, 255, 255);font-weight:normal;">Catégorie</th>
+									<th width="75" align="left" style="font-family:Helvetica,Arial,sans-serif;font-size:12px;color: rgb(255, 255, 255);font-weight:normal;">Référence</th>
+									<th width="90" align="left" style="font-family:Helvetica,Arial,sans-serif;font-size:12px;color: rgb(255, 255, 255);font-weight:normal;">Mots clés</th>
 								</tr>
 							</table>
 						</td>
@@ -124,19 +124,20 @@ class Html{
 						
 					?>
 					
-						<tr bgcolor="ffffff">
+						<tr align="center" bgcolor="ffffff">
 							<td>
-			    				<table border="0" width="550" align="center" class="container-middle" cellpadding="0" cellspacing="0">
+			    				<table border="0" width="550" align="center" class="container-middle mainListTable" cellpadding="0" cellspacing="0">
 									<tr style="color: #0f4060; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;" bgcolor="ffffff">
-			        					<td width="70" align="left"><?php  echo $one->datep_nouveaute; ?></td>
-			        					<td width="70" align="left"><?php  echo $one->dated_nouveaute; ?></td>
-			        					<td width="130" align="left"><?php echo $one->nameCat; ?></td>
-			        					<td width="75" align="left">
-			        					   <a style="color:#0f4060;font-weight:bold;" target="_blank" href="<?php echo $home;?>/?page_id=<?php echo $pageRoot; ?>&arret=<?php echo $one->numero_nouveaute;?>">
-			        						  <?php echo $one->numero_nouveaute; ?>
+			        					<td style="color: #0f4060; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;" width="70" align="left"><?php  echo $one->datep_nouveaute; ?></td>
+			        					<td style="color: #0f4060; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;" width="70" align="left"><?php  echo $one->dated_nouveaute; ?></td>
+			        					<td style="color: #0f4060; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;" width="130" align="left"><?php echo $one->nameCat; ?></td>
+			        					<td style="color: #0f4060; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;" width="75" align="left">
+			        					   <a style="color:#0f4060;font-weight:bold;" target="_blank" href="<?php echo $home;?>/?page_id=<?php echo $pageRoot; ?>&arret=
+<?php echo $one->numero_nouveaute;?>&retour=1143">
+			        				<?php echo $one->numero_nouveaute; ?>
 			        					   </a>
 			        					</td>
-			        					<td width="90" align="left"><?php if(!empty($words)){ echo $words; } ?></td>
+			        					<td style="color: #0f4060; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;" width="90" align="left"><?php if(!empty($words)){ echo $words; } ?>&nbsp;</td>
 									</tr>
 								</table>
 							</td>	
@@ -144,7 +145,7 @@ class Html{
 						<tr bgcolor="ffffff"><td colspan="6" height="10"></td></tr>	
 					
 					<?php } ?>	
-					
+					<tr bgcolor="ffffff"><td colspan="10" height="10"></td></tr>	
     			</table>
     		</td>
     	 </tr>

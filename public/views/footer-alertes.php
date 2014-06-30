@@ -5,7 +5,7 @@
 			       
 				<!-- -------- footer  ------- -->
                 
-                <table border="0" width="600" cellpadding="0" cellspacing="0" class="container" align="center">
+                <table bgcolor="43637c" border="0" width="600" cellpadding="0" cellspacing="0" class="container" align="center">
                 	<tr bgcolor="43637c"><td height="10"></td></tr>
                 	                	
                 	<tr bgcolor="43637c">

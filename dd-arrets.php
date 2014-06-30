@@ -89,13 +89,13 @@ function add_alerte_schedule()
 	// Schedule an action if it's not already scheduled
 	if ( ! wp_next_scheduled( 'dd_daily_alert' ) ) 
 	{
-	    wp_schedule_event( time() + 300 , 'daily', 'dd_daily_alert' ); // Add 5 minutes to wait for update to finish
+	    // wp_schedule_event( time() + 300 , 'daily', 'dd_daily_alert' ); // Add 5 minutes to wait for update to finish
 	}
 }
 
 function clear_alerte_schedule()
 {
-	wp_clear_scheduled_hook('dd_daily_alert');
+	// wp_clear_scheduled_hook('dd_daily_alert');
 }
 
 /**
