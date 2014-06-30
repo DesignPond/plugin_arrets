@@ -95,7 +95,7 @@ function add_alerte_schedule()
 
 function clear_alerte_schedule()
 {
-	wp_clear_scheduled_hook('dd_daily_alert');
+	// wp_clear_scheduled_hook('dd_daily_alert');
 }
 
 /**

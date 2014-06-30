@@ -410,6 +410,7 @@ class DD_Arrets {
 			wp_mail('cindy.leschaud@gmail.com', 'Alertes', 'Arrêts pas updated!');
 			exit();
 		}
+<<<<<<< HEAD
 		else
 		{
 			// And if it's not sent already
@@ -426,6 +427,13 @@ class DD_Arrets {
 				exit();
 			}
 		}
+=======
+		// And if it's not sent already
+		
+		$abos = $this->sendalert->prepareAlert($date,$currentday);
+		
+		//$this->goSendAlertes($abos);
+>>>>>>> 1c8ed98d0b1ee46b1b380224f6749a20a4b8063f
 
 	}
 	
