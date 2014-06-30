@@ -101,6 +101,29 @@ class Sendalert{
 	
 	}
 	
+		
+	/**
+	 *  Test if alertes are not already sent
+	*/
+	public function areWeSending(){
+	
+		global $wpdb;
+		
+		$today = date('Y-m-d');
+				
+		// Get last date
+		$sent = $wpdb->get_results('SELECT * FROM wp_dd_alertes WHERE send = "'.$today.'" GROUP BY send ');	
+		
+		if( empty($sent) )
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}	
+	}
+	
 	/*
 	 * Prepapre send data and send!
 	*/

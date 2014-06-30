@@ -84,7 +84,21 @@
 					
 					foreach($everything as $user => $arrets)
 					{				
-						echo $dd_html->setAlerteHtml($user,$arrets);	
+						$html = $dd_html->setAlerteHtml($user,$arrets);	
+						
+						echo $html;
+						
+						$us    = get_userdata( $user );
+						$email = $us->user_email;
+												
+						if($user == 4)
+						{
+							add_filter( 'wp_mail_content_type', create_function('', 'return "text/html"; '));
+							//wp_mail('cindy.leschaud@gmail.com', 'Nouveaux arrêts depuis Droit pour le praticien', $html);
+							//wp_mail('cindy.leschaud@unine.ch', 'Nouveaux arrêts depuis Droit pour le praticien', $html);
+							//wp_mail('pruntrut@yahoo.fr', 'Nouveaux arrêts depuis Droit pour le praticien', $html);	
+						}				
+							
 					}			
 				}
 			

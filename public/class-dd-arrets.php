@@ -410,11 +410,22 @@ class DD_Arrets {
 			wp_mail('cindy.leschaud@gmail.com', 'Alertes', 'Arrêts pas updated!');
 			exit();
 		}
-		// And if it's not sent already
-		
-		$abos = $this->sendalert->prepareAlert($date,$currentday);
-		
-		$this->goSendAlertes($abos);
+		else
+		{
+			// And if it's not sent already
+			if( $this->sendalert->areWeSending() )
+			{
+				wp_mail('cindy.leschaud@gmail.com', 'Alertes', 'Alertes up up and away!');
+				exit();
+				//$abos = $this->sendalert->prepareAlert($date,$currentday);		
+				//$this->goSendAlertes($abos);
+			}
+			else
+			{
+				wp_mail('cindy.leschaud@gmail.com', 'Alertes', 'Alertes already sent');
+				exit();
+			}
+		}
 
 	}
 	

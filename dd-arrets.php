@@ -68,7 +68,7 @@ function add_arrets_schedule()
 	// Schedule an action if it's not already scheduled
 	if ( ! wp_next_scheduled( 'dd_daily_arrets' ) ) 
 	{
-		wp_schedule_event( time(), 'daily', 'dd_daily_arrets' );
+		wp_schedule_event( current_time( 'timestamp' ) + 60, 'daily', 'dd_daily_arrets' );
 	}
 }
 
@@ -89,7 +89,7 @@ function add_alerte_schedule()
 	// Schedule an action if it's not already scheduled
 	if ( ! wp_next_scheduled( 'dd_daily_alert' ) ) 
 	{
-	    wp_schedule_event( time() + 300 , 'daily', 'dd_daily_alert' ); // Add 5 minutes to wait for update to finish
+	   wp_schedule_event( current_time( 'timestamp' ) + 900 , 'daily', 'dd_daily_alert' ); // Add 15 minutes to wait for update to finish
 	}
 }
 
